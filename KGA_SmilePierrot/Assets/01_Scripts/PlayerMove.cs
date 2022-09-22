@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
-{
-
+{ 
     [SerializeField]
     private float playerMove; 
+
+
 
 }
