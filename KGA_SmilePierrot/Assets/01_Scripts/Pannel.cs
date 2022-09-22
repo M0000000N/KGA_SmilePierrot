@@ -4,15 +4,14 @@ using UnityEngine;
 
 public class Pannel : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private List<int> colorIndex;
+    private void Start()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+            Debug.Log("들어왔냐");
+        colorIndex = CSVParser.Instance.GetColorIndex(1);
+        for (int i = 0; i < colorIndex.Count; i++)
+        {
+            Debug.Log(colorIndex[i]);
+        }
     }
 }
