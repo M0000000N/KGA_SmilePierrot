@@ -65,8 +65,6 @@ public class CSVParser : SingletonBehaviour<CSVParser>
 
     public List<int> GetColorIndex(int _index)
     {
-        Debug.Log("들어와?");
-        Debug.Log("현재 스테이지 : " + GetCsvData(_index).Stage);
         List<int> colorIndexList = new List<int>();
 
         if (GetCsvData(_index).color_1 == "1")
