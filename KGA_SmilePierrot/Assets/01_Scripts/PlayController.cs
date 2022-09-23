@@ -29,7 +29,7 @@ public class PlayController : MonoBehaviour
     {
         float xRotation = Input.GetAxisRaw("Mouse Y");
         float cameraRotationX = xRotation * lookSensitivity;
-        currentCameraRotationX += cameraRotationX;
+        currentCameraRotationX -= cameraRotationX;
         currentCameraRotationX = Mathf.Clamp(currentCameraRotationX, -cameraRotationLimit, cameraRotationLimit); // 각도 제한 
 
         float yRotation = Input.GetAxisRaw("Mouse X");
