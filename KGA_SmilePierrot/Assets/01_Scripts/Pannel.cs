@@ -27,13 +27,17 @@ public class Pannel : MonoBehaviour
         pannelRenderer = transform.GetChild(0).GetComponent<MeshRenderer>(); ;
         colorText = GetComponentInChildren<TextMeshPro>();
     }
-    private void Start()
+    void Start()
+    {
+        Initialize();
+    }
+
+    public void Initialize()
     {
         ShowAll = false;
+        
         csvColorIndex = CSVParser.Instance.GetColorIndex(GameManager.Instance.Stage);
-
         ResourceMaterial = Resources.LoadAll<Material>("MaterialColor");
-
         RandomMaterial = new Material[RememberCount];
 
         SetRandomRememberColor();

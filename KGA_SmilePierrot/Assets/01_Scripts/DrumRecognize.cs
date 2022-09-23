@@ -53,12 +53,19 @@ public class DrumRecognize : MonoBehaviour
                     // 틀렸을 때 새로 시작 
                     // HP 0 -> 게임오버 
 
-                    // HP--
-                    // stage++
-                    // clickcount = 0
-                    // return;
+                    GameManager.Instance.Damaged();
+                    clickCount = 0;
+                    pannel.Initialize();
+                    return;
                 }
                 clickCount++;
+
+                if (pannel.RandomMaterial.Length <= clickCount)
+                {
+                    GameManager.Instance.NextStage();
+                    clickCount = 0;
+                    pannel.Initialize();
+                }
             }
 
         }
