@@ -18,6 +18,7 @@ public class Pannel : MonoBehaviour
 
     public Material pannelColor; // 현재 패널 컬러
     public Material[] RandomMaterial; // 랜덤으로 저장될 색
+    public bool ShowAll;
 
     private List<int> csvColorIndex;
 
@@ -28,6 +29,7 @@ public class Pannel : MonoBehaviour
     }
     private void Start()
     {
+        ShowAll = false;
         csvColorIndex = CSVParser.Instance.GetColorIndex(GameManager.Instance.Stage);
 
         ResourceMaterial = Resources.LoadAll<Material>("MaterialColor");
@@ -66,6 +68,7 @@ public class Pannel : MonoBehaviour
             yield return new WaitForSeconds(delayTime);
             index++;
         }
+        ShowAll = true;
         Debug.Log("멈춘다");
         yield break;
     }
