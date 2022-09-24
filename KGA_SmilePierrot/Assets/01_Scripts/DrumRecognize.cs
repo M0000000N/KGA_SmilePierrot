@@ -14,6 +14,7 @@ public class DrumRecognize : MonoBehaviour
 
     [SerializeField]
     private GameObject[] Drum;
+
     void Start()
     {
         //hitInfo = GetComponent<RaycastHit>();
@@ -24,14 +25,15 @@ public class DrumRecognize : MonoBehaviour
         ColorDrum();
 
     }
+    
     private void ColorDrum()
     {
         RaycastHit raycast;
-        Debug.DrawRay(transform.position, transform.forward * 5f, Color.red);
+        Debug.DrawRay(transform.position, transform.forward.normalized * 5f, Color.red);
 
         layerMask = LayerMask.GetMask("Drum");
         Physics.Raycast(transform.position, transform.forward, out hitInfo, 60f, layerMask);
-        
+       
         // 색이 나오기 전에 
         if (Input.GetMouseButtonDown(0)&& pannel.ShowAll)
         {
@@ -70,5 +72,11 @@ public class DrumRecognize : MonoBehaviour
 
         }
     }
+    private void OnTriggerEnter(Collider other)
+    {
+        
+    }
+
+
 
 }
