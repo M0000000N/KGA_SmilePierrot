@@ -32,9 +32,7 @@ public class DrumRecognize : MonoBehaviour
 
     void Start()
     {
-
         isStickMove = true;
-
     }
 
     void Update()
@@ -44,13 +42,10 @@ public class DrumRecognize : MonoBehaviour
 
     private void ColorDrum()
     {
-
         Debug.DrawRay(transform.position, transform.forward.normalized * 5f, Color.red);
 
         if (Input.GetMouseButtonDown(0) && pannel.ShowAll)
-        {
-            //비트연산 잊지말자! 뺨과 이가 동시에 나감 ... 주의 
-            // Getmask = 바로 비트 받아옴 , NametoLayer 비트연산 해줘야 함
+        {           
             layerMask = 1 << LayerMask.NameToLayer("Drum");
 
             if (Physics.Raycast(transform.position, transform.forward, out hitInfo, 60f, layerMask) == false)
@@ -81,14 +76,12 @@ public class DrumRecognize : MonoBehaviour
             }
             clickCount++;
 
-
             if (pannel.RandomMaterial.Length <= clickCount)
             {
                 GameManager.Instance.NextStage();
                 clickCount = 0;
                 pannel.Initialize();
             }
-
 
         }
 
