@@ -84,3 +84,8 @@ public class Pannel : MonoBehaviour
         pannelRenderer.sharedMaterial.SetTextureOffset("_MainTex", Vector2.one);
     }
 }
+
+// 상황에 맞지 않은 컴포넌트 사용
+// 정상 로직 아님 // material 탐색하면서 비용발생 // 차라리 transform 비교 
+// Best 비교 
+// Enum 열거형으로 비교 

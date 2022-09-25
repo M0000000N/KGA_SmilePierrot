@@ -2,11 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+    enum EColor
+    {
+        RED,
+        BLUE,
+        GREEN,
+        WHITE,
+    }
 //빨 : 1 , 파 : 2, 초 : 3, 흰 :4, 주 : 5
 public class DrumRecognize : MonoBehaviour
 {
     private RaycastHit hitInfo;
-    private LayerMask layerMask;
+    private int layerMask;
 
     public Pannel pannel;
 
@@ -15,68 +22,76 @@ public class DrumRecognize : MonoBehaviour
     [SerializeField]
     private GameObject[] Drum;
 
+    // 애니메이션부분
+    [SerializeField]
+    private Animator anim;
+
+    private bool isStickMove;
+    private bool isStickState;
+
+
     void Start()
     {
-        //hitInfo = GetComponent<RaycastHit>();
+
+        isStickMove = true;
 
     }
+
     void Update()
     {
         ColorDrum();
-
     }
-    
+
     private void ColorDrum()
     {
-        RaycastHit raycast;
+
         Debug.DrawRay(transform.position, transform.forward.normalized * 5f, Color.red);
 
-        layerMask = LayerMask.GetMask("Drum");
-        Physics.Raycast(transform.position, transform.forward, out hitInfo, 60f, layerMask);
-       
-        // 색이 나오기 전에 
-        if (Input.GetMouseButtonDown(0)&& pannel.ShowAll)
+        if (Input.GetMouseButtonDown(0) && pannel.ShowAll)
         {
-            if (hitInfo.transform.tag == "Drum") // 조건문 다시 
+            //비트연산 잊지말자! 뺨과 이가 동시에 나감 ... 주의 
+            // Getmask = 바로 비트 받아옴 , NametoLayer 비트연산 해줘야 함
+            layerMask = 1 << LayerMask.NameToLayer("Drum");
+
+            if (Physics.Raycast(transform.position, transform.forward, out hitInfo, 60f, layerMask) == false)
             {
-                Debug.Log(hitInfo.transform.gameObject.name);
+                return;
+            }
+            
+            anim.SetTrigger("DrumIsMoving");
+            Debug.Log(hitInfo.transform.gameObject.name);
 
-                // 리소스에서 색깔 가져오기 
-                // 색깔 4개 - 인식 
-                // 리소스 material 색깔 일치 불일치 확인 
-                if (pannel.RandomMaterial[clickCount] == hitInfo.transform.GetComponent<MeshRenderer>().sharedMaterial)
-                {
-                    Debug.Log("맞음");
-                    //Debug.Log($"{hitInfo.transform.gameObject.name} : 오브젝트");
-                }
-                else
-                {
-                    Debug.Log("불일치");
-                    // 틀렸을 때 새로 시작 
-                    // HP 0 -> 게임오버 
+            Debug.Log($"Panel Name : {pannel.RandomMaterial[clickCount].name}");
+            Debug.Log($"hitInfo : {hitInfo.transform.GetComponent<MeshRenderer>().sharedMaterial.name}");
+            if (pannel.RandomMaterial[clickCount].name == hitInfo.transform.GetComponent<MeshRenderer>().sharedMaterial.name)
+            {
+                Debug.Log("맞음");
+                //Debug.Log($"{hitInfo.transform.gameObject.name} : 오브젝트");
+            }
+            else
+            {
+                Debug.Log("불일치");
+                // 틀렸을 때 새로 시작 
+                // HP 0 -> 게임오버 
 
-                    GameManager.Instance.Damaged();
-                    clickCount = 0;
-                    pannel.Initialize();
-                    return;
-                }
-                clickCount++;
+                GameManager.Instance.Damaged();
+                clickCount = 0;
+                pannel.Initialize();
+                return;
+            }
+            clickCount++;
 
-                if (pannel.RandomMaterial.Length <= clickCount)
-                {
-                    GameManager.Instance.NextStage();
-                    clickCount = 0;
-                    pannel.Initialize();
-                }
+
+            if (pannel.RandomMaterial.Length <= clickCount)
+            {
+                GameManager.Instance.NextStage();
+                clickCount = 0;
+                pannel.Initialize();
             }
 
+
         }
-    }
-    private void OnTriggerEnter(Collider other)
-    {
-        
-    }
 
-
+    }
 
 }
