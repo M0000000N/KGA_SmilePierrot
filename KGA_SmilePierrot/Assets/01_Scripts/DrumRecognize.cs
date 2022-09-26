@@ -39,25 +39,31 @@ public class DrumRecognize : MonoBehaviour
             anim.SetTrigger("DrumIsMoving");
             Debug.Log(hitInfo.transform.gameObject.name);
 
+            clickCount++;
+
             if (pannel.RandomMaterial[clickCount].name == hitInfo.transform.GetComponent<MeshRenderer>().sharedMaterial.name)
             {
                 Debug.Log("맞음");
+                UIManager.Instance.Log.text = "진행 : " + clickCount + "/" + pannel.RandomMaterial.Length + "\n 맞았습니다.";
+
             }
             else
             {
                 Debug.Log("불일치");
                 // 틀렸을 때 새로 시작 
                 // HP 0 -> 게임오버 
+                clickCount = 0;
+                UIManager.Instance.Log.text = "진행 : " + clickCount + "/" + pannel.RandomMaterial.Length + "\n 틀렸습니다. HP가 감소하고 다음 스테이지로 넘어갑니다.";
 
                 GameManager.Instance.Damaged();
-                clickCount = 0;
                 pannel.Initialize();
                 return;
             }
-            clickCount++;
 
             if (pannel.RandomMaterial.Length <= clickCount)
             {
+                UIManager.Instance.Log.text = "진행 : " + clickCount + "/" + pannel.RandomMaterial.Length + "\n 맞았습니다. 스테이지를 클리어하여 다음 스테이지로 넘어갑니다.";
+
                 GameManager.Instance.NextStage();
                 clickCount = 0;
                 pannel.Initialize();

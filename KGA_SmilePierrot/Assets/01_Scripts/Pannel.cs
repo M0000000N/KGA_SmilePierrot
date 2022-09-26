@@ -64,11 +64,13 @@ public class Pannel : MonoBehaviour
     IEnumerator SetPannelColorCoroutine()
     {
         int index = 0;
+        UIManager.Instance.답.text = "답 : ";
         while (index < RememberCount)
         {
             SetPannelColor(index);
             colorText.text = colorTextArray[int.Parse(pannelColor.name) - 1];
             Debug.Log(index + "번째 색상 : " + pannelColor);
+            UIManager.Instance.답.text += $"{pannelColor.name} / ";
             yield return new WaitForSeconds(delayTime);
             index++;
         }
