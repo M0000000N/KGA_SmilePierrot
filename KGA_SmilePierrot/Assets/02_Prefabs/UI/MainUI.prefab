@@ -202,7 +202,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 153000139778716366}
         m_TargetAssemblyTypeName: MainUI, Assembly-CSharp
-        m_MethodName: GameStartButton
+        m_MethodName: GameStartButtonClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -583,7 +583,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 153000139778716366}
         m_TargetAssemblyTypeName: MainUI, Assembly-CSharp
-        m_MethodName: CreditButton
+        m_MethodName: CreditButtonClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -950,7 +950,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 153000139778716366}
         m_TargetAssemblyTypeName: MainUI, Assembly-CSharp
-        m_MethodName: ExitButton
+        m_MethodName: ExitButtonClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

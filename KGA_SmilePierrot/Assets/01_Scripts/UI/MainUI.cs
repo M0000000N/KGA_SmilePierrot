@@ -5,22 +5,16 @@ using UnityEngine;
 public class MainUI : MonoBehaviour
 {
     public Transform InitTransform;
-    private void Awake()
+
+    public void Initialize()
     {
         transform.position = InitTransform.position;
+        gameObject.SetActive(true);
     }
-    private void Start()
-    {
-        Initionalize();
-    }
-    public void Initionalize()
-    {
-        gameObject.SetActive(false);
-    }
+
     public void GameStartButtonClick()
     {
         UIManager.Instance.GameStartPopUpUI.gameObject.SetActive(true);
-        Debug.Log("게임스타트");
     }
 
     public void ExitButtonClick()
@@ -31,7 +25,7 @@ public class MainUI : MonoBehaviour
 
     public void CreditButtonClick()
     {
-        // 제작 UI 아마 추가
+        // 제작 UI 추가예정
         Debug.Log("제작");
     }
 }

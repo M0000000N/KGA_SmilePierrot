@@ -5,22 +5,22 @@ using UnityEngine;
 public class MenuPopUpUI : MonoBehaviour
 {
     public Transform InitTransform;
-    private void Awake()
+
+    public void Initialize()
     {
         transform.position = InitTransform.position;
-    }
-    private void Start()
-    {
-        Initionalize();
-    }
-    public void Initionalize()
-    {
         gameObject.SetActive(false);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void ResumeButtonCilck()
     {
-        
+        Debug.Log("게임 재개");
+        gameObject.SetActive(false);
+        Time.timeScale = 1;
+
+    }
+    public void ExitButtonCilck()
+    {
+        Debug.Log("게임 종료");
     }
 }

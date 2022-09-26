@@ -120,7 +120,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8897875805730515193}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6402776859988622880}
+        m_TargetAssemblyTypeName: MenuPopUpUI, Assembly-CSharp
+        m_MethodName: ExitButtonCilck
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1177527899213796514
 GameObject:
   m_ObjectHideFlags: 0
@@ -289,7 +301,7 @@ GameObject:
   - component: {fileID: 8826949251029129016}
   - component: {fileID: 1162016452684162307}
   m_Layer: 5
-  m_Name: RestartButton
+  m_Name: ResumeButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -396,7 +408,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8826949251029129016}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6402776859988622880}
+        m_TargetAssemblyTypeName: MenuPopUpUI, Assembly-CSharp
+        m_MethodName: ResumeButtonCilck
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &2935887344498616308
 GameObject:
   m_ObjectHideFlags: 0
