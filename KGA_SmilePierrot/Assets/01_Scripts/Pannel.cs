@@ -46,13 +46,13 @@ public class Pannel : MonoBehaviour
 
     public void SetRandomRememberColor()
     {
-        int[] isdone = new int[ResourceMaterial.Length]; // 4개 컬러중 3번 이상 안나오도록
+        int[] isDone = new int[ResourceMaterial.Length]; // 4개 컬러중 3번 이상 안나오도록
 
         for (int i = 0; i < RememberCount; i++)
         {
             int randNum = csvColorIndex[Random.Range(0, csvColorIndex.Count)];
-            isdone[randNum - 1]++;
-            if (isdone[randNum - 1] > 2)
+            isDone[randNum - 1]++;
+            if (isDone[randNum - 1] > 2)
             {
                 i--;
                 continue;

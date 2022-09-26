@@ -24,7 +24,7 @@ public class GameManager : SingletonBehaviour<GameManager>
     public void Damaged()
     {
         HP--;
-        UIManager.Instance.HP.text = HP.ToString();
+        UIManager.Instance.HP.text = "HP : " + HP.ToString();
 
         UnityEngine.Debug.Log("HP : " + HP);
         if( HP <= 0)
@@ -45,7 +45,7 @@ public class GameManager : SingletonBehaviour<GameManager>
     public void NextStage()
     {
         Stage++;
-        UIManager.Instance.Stage.text = Stage.ToString();
+        UIManager.Instance.Stage.text = "Stage : " + Stage.ToString();
     }
 
     public bool IsRightColor(int _colorType)

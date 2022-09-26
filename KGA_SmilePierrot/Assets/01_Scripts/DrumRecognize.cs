@@ -39,13 +39,13 @@ public class DrumRecognize : MonoBehaviour
             anim.SetTrigger("DrumIsMoving");
             Debug.Log(hitInfo.transform.gameObject.name);
 
-            clickCount++;
 
             if (pannel.RandomMaterial[clickCount].name == hitInfo.transform.GetComponent<MeshRenderer>().sharedMaterial.name)
             {
                 Debug.Log("맞음");
+                
+                clickCount++;
                 UIManager.Instance.Log.text = "진행 : " + clickCount + "/" + pannel.RandomMaterial.Length + "\n 맞았습니다.";
-
             }
             else
             {
