@@ -23,7 +23,7 @@ public class DrumRecognize : MonoBehaviour
         ColorDrum();
     }
 
-    private void ColorDrum()
+    private void ColorDrum()    
     {
         Debug.DrawRay(transform.position, transform.forward.normalized * 5f, Color.red);
 
