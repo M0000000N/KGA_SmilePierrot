@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 1041538198142819818}
   - component: {fileID: 1041538198142819817}
   - component: {fileID: 1041538198142819816}
-  - component: {fileID: 6637931154717621012}
   m_Layer: 0
   m_Name: Pannel
   m_TagString: Untagged
@@ -62,7 +61,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a7f0bf1901583f442b83cf5a7d0f92df, type: 2}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -109,20 +108,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6be7be4a17f5a84f95f82af8a4ca642, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Index: 1
+  delayTime: 0
+  RememberCount: 5
   pannelColor: {fileID: 0}
   ResourceMaterial: []
   RandomMaterial: []
-  RememberCount: 5
---- !u!114 &6637931154717621012
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1041538198142819823}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 433e7fdb41872c34f9b67bdc43735b26, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

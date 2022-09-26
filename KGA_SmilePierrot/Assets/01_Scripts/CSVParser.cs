@@ -17,10 +17,6 @@ public class DataTable // 실제 데이터와 이름이 같아야한다.
     public string color_2 { get; set; }
     public string color_3 { get; set; }
     public string color_4 { get; set; }
-    public string color_5 { get; set; }
-    public string color_6 { get; set; }
-    public string color_7 { get; set; }
-    public string color_8 { get; set; }
 }
 public class CSVParser : SingletonBehaviour<CSVParser>
 {
@@ -28,7 +24,7 @@ public class CSVParser : SingletonBehaviour<CSVParser>
     private void Awake()
     {
         // 1. 리소스 폴더에서 csv 로드
-        TextAsset csvTextAsset = Resources.Load<TextAsset>("CSV/stage_DB_ver1.1");
+        TextAsset csvTextAsset = Resources.Load<TextAsset>("CSV/stage_DB_ver1.2");
 
         // 2. csv파일 설정 - CsvReader의 매개변수 Configuration에 들어갈 변수
         CsvConfiguration config = new CsvConfiguration(CultureInfo.InvariantCulture)
@@ -63,6 +59,11 @@ public class CSVParser : SingletonBehaviour<CSVParser>
         return dataTable[_index];
     }
 
+    /// <summary>
+    /// 해당 스테이지에서 원하는 컬러 인덱스 리스트
+    /// </summary>
+    /// <param name="_index">스테이지</param>
+    /// <returns></returns>
     public List<int> GetColorIndex(int _index)
     {
         List<int> colorIndexList = new List<int>();
@@ -82,22 +83,6 @@ public class CSVParser : SingletonBehaviour<CSVParser>
         if (GetCsvData(_index).color_4 == "1")
         {
             colorIndexList.Add(4);
-        }
-        if (GetCsvData(_index).color_5 == "1")
-        {
-            colorIndexList.Add(5);
-        }
-        if (GetCsvData(_index).color_6 == "1")
-        {
-            colorIndexList.Add(6);
-        }
-        if (GetCsvData(_index).color_7 == "1")
-        {
-            colorIndexList.Add(7);
-        }
-        if (GetCsvData(_index).color_8 == "1")
-        {
-            colorIndexList.Add(8);
         }
         return colorIndexList;
     }
