@@ -4,20 +4,20 @@ using UnityEngine;
 
 public class GameStartPopUpUI : MonoBehaviour
 {
-    public Transform InitTransform;
+    private Transform initTransform;
 
     public void Initialize()
     {
-        InitTransform = this.transform.parent.transform;
+        initTransform = this.transform.parent.transform;
+        transform.position = initTransform.position;
 
-        transform.position = InitTransform.position;
         gameObject.SetActive(false);
     }
 
     public void GameStartButtonClick()
     {
+        gameObject.SetActive(false);
         UIManager.Instance.MainUI.gameObject.SetActive(false);
-        UIManager.Instance.GameStartPopUpUI.gameObject.SetActive(false);
         UIManager.Instance.InGameUI.gameObject.SetActive(true);
 
         Debug.Log("게임시작");

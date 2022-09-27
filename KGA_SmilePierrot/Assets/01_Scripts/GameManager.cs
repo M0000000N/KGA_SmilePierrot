@@ -5,7 +5,7 @@ using UnityEngine;
 public class GameManager : SingletonBehaviour<GameManager>
 {
     public int HP;
-    
+
     public int Stage;
     public int ClickCount;
 
@@ -19,6 +19,8 @@ public class GameManager : SingletonBehaviour<GameManager>
     public int[] LimitTime;
 
 
+    public bool IsInGame;
+    public bool IsPause;
 
     private void Awake()
     {
@@ -26,11 +28,13 @@ public class GameManager : SingletonBehaviour<GameManager>
         LimitTime = new int[MAXSTAGE];
     }
 
-    private void Initialize()
+    public void Initialize()
     {
         HP = 5;
         ClickCount = 0;
         Stage = 1;
+        IsInGame = false;
+        IsPause = false;
     }
 
     public void Damaged()
@@ -48,10 +52,12 @@ public class GameManager : SingletonBehaviour<GameManager>
         UnityEngine.Debug.Log("게임오버");
         UIManager.Instance.InGameUI.gameObject.SetActive(false);
         UIManager.Instance.GameOverUI.gameObject.SetActive(true);
+        IsInGame = false;
     }
 
     public void GameStart() // 랜덤으로 패널 보여주기
     {
+        IsInGame = true;
         if (Stage == 1)
         {
             Pannel.StartCoroutine("SetPannelColorCoroutine",1f);
@@ -64,13 +70,18 @@ public class GameManager : SingletonBehaviour<GameManager>
         {
             Pannel.StartCoroutine("SetPannelColorCoroutine",2f);
         }
+        ClickCount = 0;
+        UIManager.Instance.InGameUI.SetStageText(Stage);
+        UIManager.Instance.InGameUI.SetHp(HP);
+        pannel.Initialize();
     }
 
     public void NextStage()
     {
-        if(Stage >= MAXSTAGE) // TODO : 나중에 매직넘버 바꿔주세요.
+        if (Stage >= MAXSTAGE) // TODO : 나중에 매직넘버 바꿔주세요.
         {
             // 게임 클리어 씬으로 이동을 하던가 하겠죠
+            UIManager.Instance.ClearUI.gameObject.SetActive(true);
             return;
         }
 
@@ -103,5 +114,11 @@ public class GameManager : SingletonBehaviour<GameManager>
             Damaged();
             SetStage();
         }
+    }
+
+    public void Pause()
+    {
+        IsPause = true;
+        Time.timeScale = 0;
     }
 }

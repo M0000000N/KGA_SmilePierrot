@@ -4,22 +4,21 @@ using UnityEngine;
 
 public class MenuPopUpUI : MonoBehaviour
 {
-    public Transform InitTransform;
+    private Transform initTransform;
 
     public void Initialize()
     {
-        InitTransform = this.transform.parent.transform;
+        initTransform = this.transform.parent.transform;
+        transform.position = initTransform.position;
 
-        transform.position = InitTransform.position;
         gameObject.SetActive(false);
     }
 
     public void ResumeButtonCilck()
     {
-        Debug.Log("게임 재개");
         gameObject.SetActive(false);
+        GameManager.Instance.IsPause = false;
         Time.timeScale = 1;
-
     }
     public void ExitButtonCilck()
     {

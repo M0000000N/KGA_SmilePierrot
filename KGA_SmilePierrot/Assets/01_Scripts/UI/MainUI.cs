@@ -4,30 +4,32 @@ using UnityEngine;
 
 public class MainUI : MonoBehaviour
 {
-    public Transform InitTransform;
+    private Transform initTransform;
 
     public void Initialize()
     {
-        InitTransform = this.transform.parent.transform;
+        initTransform = this.transform.parent.transform;
+        transform.position = initTransform.position;
 
-        transform.position = InitTransform.position;
         gameObject.SetActive(true);
     }
 
     public void GameStartButtonClick()
     {
         UIManager.Instance.GameStartPopUpUI.gameObject.SetActive(true);
+        GameManager.Instance.Initialize();
+        GameManager.Instance.GameStart();
     }
 
     public void ExitButtonClick()
     {
-        Application.Quit();
         Debug.Log("게임종료");
+        Application.Quit();
     }
 
     public void CreditButtonClick()
     {
-        // 제작 UI 추가예정
-        Debug.Log("제작");
+        gameObject.SetActive(false);
+        UIManager.Instance.CreditUI.gameObject.SetActive(true);
     }
 }

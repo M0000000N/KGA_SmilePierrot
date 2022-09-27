@@ -2,23 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class GameOverUI : MonoBehaviour
 {
-    public Transform InitTransform;
+    private Transform initTransform;
 
     public void Initialize()
     {
-        InitTransform = this.transform.parent.transform;
+        initTransform = this.transform.parent.transform;
+        transform.position = initTransform.position;
 
-        transform.position = InitTransform.position;
-        gameObject.SetActive(false);
+        gameObject.SetActive(true);
     }
     public void YesButtonClick()
     {
-        Debug.Log("다시 플레이 할게요");
+        gameObject.SetActive(false);
+        UIManager.Instance.InGameUI.gameObject.SetActive(true);
+        GameManager.Instance.Initialize();
+        GameManager.Instance.GameStart();
     }
     public void NoButtonClick()
     {
-        Debug.Log("다시 플레이 안해");
+        gameObject.SetActive(false);
+        UIManager.Instance.MainUI.gameObject.SetActive(true);
     }
 }
