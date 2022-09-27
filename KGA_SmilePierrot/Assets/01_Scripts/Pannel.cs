@@ -1,4 +1,3 @@
-//using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -41,7 +40,6 @@ public class Pannel : MonoBehaviour
         RandomMaterial = new Material[RememberCount];
 
         SetRandomRememberColor();
-        StartCoroutine("SetPannelColorCoroutine");
     }
 
     public void SetRandomRememberColor()
@@ -61,19 +59,21 @@ public class Pannel : MonoBehaviour
         }
     }
 
-    IEnumerator SetPannelColorCoroutine()
+    public IEnumerator SetPannelColorCoroutine()
     {
         int index = 0;
+        UIManager.Instance.InGameUI.AnswerText.text = "´ä : ";
         while (index < RememberCount)
         {
             SetPannelColor(index);
             colorText.text = colorTextArray[int.Parse(pannelColor.name) - 1];
-            Debug.Log(index + "¹øÂ° »ö»ó : " + pannelColor);
+            UIManager.Instance.InGameUI.AnswerText.text += pannelColor.name + " / ";
             yield return new WaitForSeconds(delayTime);
             index++;
         }
         ShowAll = true;
-        Debug.Log("¸ØÃá´Ù");
+        Debug.Log("¸ÂÃçºÁ¶ó!");
+        UIManager.Instance.InGameUI.StartTimeLimit();
         yield break;
     }
 

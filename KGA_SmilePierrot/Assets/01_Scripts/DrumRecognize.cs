@@ -60,7 +60,6 @@ public class DrumRecognize : MonoBehaviour
             {
                 GameManager.Instance.NextStage();
                 clickCount = 0;
-                pannel.Initialize();
             }
         }
     }
