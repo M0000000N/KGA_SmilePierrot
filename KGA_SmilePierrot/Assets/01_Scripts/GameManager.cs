@@ -73,7 +73,7 @@ public class GameManager : SingletonBehaviour<GameManager>
         ClickCount = 0;
         UIManager.Instance.InGameUI.SetStageText(Stage);
         UIManager.Instance.InGameUI.SetHp(HP);
-        pannel.Initialize();
+        Pannel.Initialize();
     }
 
     public void NextStage()
