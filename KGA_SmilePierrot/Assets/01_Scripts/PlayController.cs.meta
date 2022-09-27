@@ -1,9 +1,6 @@
 fileFormatVersion: 2
-<<<<<<<< HEAD:KGA_SmilePierrot/Assets/01_Scripts/PlayController.cs.meta
 guid: 24cdd5d3c5fd9704696f364429c7ce74
-========
-guid: 433e7fdb41872c34f9b67bdc43735b26
->>>>>>>> Pannel-CSV:KGA_SmilePierrot/Assets/01_Scripts/CSVParser.cs.meta
+
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2

@@ -14,6 +14,8 @@ public class InGameUI : MonoBehaviour
 
     public void Initialize()
     {
+        InitTransform = this.transform.parent.transform;
+
         transform.position = InitTransform.position;
         gameObject.SetActive(false);
 
@@ -23,7 +25,7 @@ public class InGameUI : MonoBehaviour
     }
     private void Update()
     {
-        if (GameManager.Instance.pannel.ShowAll)
+        if (GameManager.Instance.CanSelectSkull)
         {
             StartTimeLimit();
         }

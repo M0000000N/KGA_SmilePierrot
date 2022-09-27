@@ -5,7 +5,14 @@ using UnityEngine;
 public class GameManager : SingletonBehaviour<GameManager>
 {
     public int HP;
+    
     public int Stage;
+    public int ClickCount;
+
+    public bool CanSelectSkull;
+
+    public int MAXSTAGE;
+
     public Pannel pannel;
 
     private void Awake()
@@ -16,6 +23,7 @@ public class GameManager : SingletonBehaviour<GameManager>
     private void Initialize()
     {
         HP = 5;
+        ClickCount = 0;
         Stage = 1;
     }
 
@@ -23,62 +31,65 @@ public class GameManager : SingletonBehaviour<GameManager>
     {
         HP--;
         UIManager.Instance.InGameUI.SetHp(HP);
-
-        UnityEngine.Debug.Log("HP : " + HP);
         if (HP <= 0)
         {
             GameOver();
-        }
-        else // [Issue1]Æ²¸®¸é ¹Ù·Î ´ÙÀ½ ½ºÅ×ÀÌÁö°¡ ¸Â´ÂÁö È®ÀÎ
-        {
-            NextStage();
         }
     }
 
     public void GameOver()
     {
-        UnityEngine.Debug.Log("°ÔÀÓ¿À¹ö");
+        UnityEngine.Debug.Log("ê²Œì„ì˜¤ë²„");
         UIManager.Instance.InGameUI.gameObject.SetActive(false);
         UIManager.Instance.GameOverUI.gameObject.SetActive(true);
     }
 
-    public void GameStart() // ·£´ıÀ¸·Î ÆĞ³Î º¸¿©ÁÖ±â
+    public void GameStart() // ëœë¤ìœ¼ë¡œ íŒ¨ë„ ë³´ì—¬ì£¼ê¸°
     {
         if (Stage == 1)
         {
-            Debug.Log("Stage == 1 µé¾î¿À³Ä");
-                pannel.StartCoroutine("SetPannelColorCoroutine");
+            pannel.StartCoroutine("SetPannelColorCoroutine");
             if (Input.GetKeyDown(KeyCode.E))
             {
-                Debug.Log("Input.GetKeyDown(KeyCode.E) µé¾î¿À³Ä");
+                // TODO : ìŠ¤í…Œì´ì§€ 1ì€ Eë¥¼ ëˆŒëŸ¬ì•¼ ì‹œì‘í•  ìˆ˜ ìˆë„ë¡ ë³€ê²½ í•„ìš”
             }
         }
         else
         {
-            Debug.Log("else µé¾î¿À³Ä");
             pannel.StartCoroutine("SetPannelColorCoroutine");
         }
     }
 
     public void NextStage()
     {
+        if(Stage >= MAXSTAGE) // TODO : ë‚˜ì¤‘ì— ë§¤ì§ë„˜ë²„ ë°”ê¿”ì£¼ì„¸ìš”.
+        {
+            // ê²Œì„ í´ë¦¬ì–´ ì”¬ìœ¼ë¡œ ì´ë™ì„ í•˜ë˜ê°€ í•˜ê² ì£ 
+            return;
+        }
+
         Stage++;
-        UnityEngine.Debug.Log("ÇöÀç ½ºÅ×ÀÌÁö : " + Stage);
+        ClickCount = 0;
         UIManager.Instance.InGameUI.SetStageText(Stage);
         pannel.Initialize();
         GameStart();
-
     }
 
-    //public bool IsRightColor(int _colorType)
-    //{
-    //    if (true)
-    //    {
-    //        return true;
-    //    }
-    //    else
-    //    {
-    //        return false;
-    //    }
-    //}
+    public void CheckColor(Color _color)
+    {
+        if (pannel.RandomMaterial[ClickCount].color == _color)
+        {
+            ClickCount++;
+            UnityEngine.Debug.Log(ClickCount);
+            if(pannel.RandomMaterial.Length <= ClickCount)
+            {
+                NextStage();
+            }
+        }
+        else
+        {
+            Damaged();
+            NextStage();
+        }
+    }
 }

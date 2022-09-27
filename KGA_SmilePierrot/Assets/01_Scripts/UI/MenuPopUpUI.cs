@@ -8,6 +8,8 @@ public class MenuPopUpUI : MonoBehaviour
 
     public void Initialize()
     {
+        InitTransform = this.transform.parent.transform;
+
         transform.position = InitTransform.position;
         gameObject.SetActive(false);
     }
