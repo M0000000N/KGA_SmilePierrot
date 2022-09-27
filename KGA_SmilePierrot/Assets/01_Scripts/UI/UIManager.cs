@@ -9,6 +9,8 @@ public class UIManager : SingletonBehaviour<UIManager>
     public InGameUI InGameUI;
     public MenuPopUpUI MenuPopUpUI;
     public GameOverUI GameOverUI;
+    public CreditUI CreditUI;
+    public ClearUI ClearUI;
 
     private void Awake()
     {
@@ -17,18 +19,20 @@ public class UIManager : SingletonBehaviour<UIManager>
         InGameUI = GetComponentInChildren<InGameUI>();
         MenuPopUpUI = GetComponentInChildren<MenuPopUpUI>();
         GameOverUI = GetComponentInChildren<GameOverUI>();
+        CreditUI = GetComponentInChildren<CreditUI>();
+        ClearUI = GetComponentInChildren<ClearUI>();
 
         Initialize();
     }
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && GameManager.Instance.IsInGame)
         {
             MenuPopUpUI.gameObject.SetActive(true);
-            Time.timeScale = 0;
+            GameManager.Instance.Pause();
         }
-
     }
+
     public void Initialize()
     {
         MainUI.Initialize();
@@ -36,6 +40,8 @@ public class UIManager : SingletonBehaviour<UIManager>
         InGameUI.Initialize();
         MenuPopUpUI.Initialize();
         GameOverUI.Initialize();
+        CreditUI.Initialize();
+        ClearUI.Initialize();
     }
 
 }

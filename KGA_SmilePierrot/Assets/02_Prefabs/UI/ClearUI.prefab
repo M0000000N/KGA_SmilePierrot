@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8458079439540323584}
   - component: {fileID: 2585207372026616389}
   - component: {fileID: 3293373177954159984}
+  - component: {fileID: 6623123194355906191}
   m_Layer: 5
   m_Name: ClearUI
   m_TagString: Untagged
@@ -80,6 +81,18 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &6623123194355906191
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 454001416667549601}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 470fe1240a32d164691c6f778aa6f78d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &506574288118245300
 GameObject:
   m_ObjectHideFlags: 0
@@ -480,7 +493,7 @@ GameObject:
   - component: {fileID: 7041750211100004342}
   - component: {fileID: 5980932856655810503}
   m_Layer: 5
-  m_Name: ExitButton
+  m_Name: GoToMainButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -587,4 +600,16 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 7041750211100004342}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6623123194355906191}
+        m_TargetAssemblyTypeName: ClearUI, Assembly-CSharp
+        m_MethodName: GoToMainButtonClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2

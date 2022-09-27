@@ -5,7 +5,7 @@ using UnityEngine;
 public class GameManager : SingletonBehaviour<GameManager>
 {
     public int HP;
-    
+
     public int Stage;
     public int ClickCount;
 
@@ -15,16 +15,16 @@ public class GameManager : SingletonBehaviour<GameManager>
 
     public Pannel pannel;
 
-    private void Awake()
-    {
-        Initialize();
-    }
+    public bool IsInGame;
+    public bool IsPause;
 
-    private void Initialize()
+    public void Initialize()
     {
         HP = 5;
         ClickCount = 0;
         Stage = 1;
+        IsInGame = false;
+        IsPause = false;
     }
 
     public void Damaged()
@@ -42,10 +42,12 @@ public class GameManager : SingletonBehaviour<GameManager>
         UnityEngine.Debug.Log("게임오버");
         UIManager.Instance.InGameUI.gameObject.SetActive(false);
         UIManager.Instance.GameOverUI.gameObject.SetActive(true);
+        IsInGame = false;
     }
 
     public void GameStart() // 랜덤으로 패널 보여주기
     {
+        IsInGame = true;
         if (Stage == 1)
         {
             pannel.StartCoroutine("SetPannelColorCoroutine");
@@ -58,20 +60,22 @@ public class GameManager : SingletonBehaviour<GameManager>
         {
             pannel.StartCoroutine("SetPannelColorCoroutine");
         }
+        ClickCount = 0;
+        UIManager.Instance.InGameUI.SetStageText(Stage);
+        UIManager.Instance.InGameUI.SetHp(HP);
+        pannel.Initialize();
     }
 
     public void NextStage()
     {
-        if(Stage >= MAXSTAGE) // TODO : 나중에 매직넘버 바꿔주세요.
+        if (Stage >= MAXSTAGE) // TODO : 나중에 매직넘버 바꿔주세요.
         {
             // 게임 클리어 씬으로 이동을 하던가 하겠죠
+            UIManager.Instance.ClearUI.gameObject.SetActive(true);
             return;
         }
 
         Stage++;
-        ClickCount = 0;
-        UIManager.Instance.InGameUI.SetStageText(Stage);
-        pannel.Initialize();
         GameStart();
     }
 
@@ -81,7 +85,7 @@ public class GameManager : SingletonBehaviour<GameManager>
         {
             ClickCount++;
             UnityEngine.Debug.Log(ClickCount);
-            if(pannel.RandomMaterial.Length <= ClickCount)
+            if (pannel.RandomMaterial.Length <= ClickCount)
             {
                 NextStage();
             }
@@ -91,5 +95,11 @@ public class GameManager : SingletonBehaviour<GameManager>
             Damaged();
             NextStage();
         }
+    }
+
+    public void Pause()
+    {
+        IsPause = true;
+        Time.timeScale = 0;
     }
 }

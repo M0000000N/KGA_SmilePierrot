@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class InGameUI : MonoBehaviour
 {
-    public Transform InitTransform;
+    private Transform initTransform;
     public Image[] HPImages;
     public Slider ProgressBar;
     public Text StageText;
@@ -14,9 +14,9 @@ public class InGameUI : MonoBehaviour
 
     public void Initialize()
     {
-        InitTransform = this.transform.parent.transform;
+        initTransform = this.transform.parent.transform;
+        transform.position = initTransform.position;
 
-        transform.position = InitTransform.position;
         gameObject.SetActive(false);
 
         SetStageText(1);
