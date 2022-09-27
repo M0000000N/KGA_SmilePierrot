@@ -13,7 +13,8 @@ public class GameManager : SingletonBehaviour<GameManager>
 
     public Pannel Pannel;
     public Skull Skull;
-    
+    public SelectSkull SelectSkull;
+
     [Header("테스트값")]
     public int MAXSTAGE;
     public int[] LimitTime;
@@ -24,7 +25,6 @@ public class GameManager : SingletonBehaviour<GameManager>
 
     private void Awake()
     {
-        Initialize();
         LimitTime = new int[MAXSTAGE];
     }
 
@@ -35,6 +35,7 @@ public class GameManager : SingletonBehaviour<GameManager>
         Stage = 1;
         IsInGame = false;
         IsPause = false;
+        SelectSkull.Initialize();
     }
 
     public void Damaged()

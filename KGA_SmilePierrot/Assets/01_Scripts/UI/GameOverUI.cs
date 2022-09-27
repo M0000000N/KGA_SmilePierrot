@@ -12,14 +12,13 @@ public class GameOverUI : MonoBehaviour
         initTransform = this.transform.parent.transform;
         transform.position = initTransform.position;
 
-        gameObject.SetActive(true);
+        gameObject.SetActive(false);
     }
     public void YesButtonClick()
     {
         gameObject.SetActive(false);
         UIManager.Instance.InGameUI.gameObject.SetActive(true);
         GameManager.Instance.Initialize();
-        GameManager.Instance.GameStart();
     }
     public void NoButtonClick()
     {

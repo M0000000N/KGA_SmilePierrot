@@ -18,7 +18,6 @@ public class MainUI : MonoBehaviour
     {
         UIManager.Instance.GameStartPopUpUI.gameObject.SetActive(true);
         GameManager.Instance.Initialize();
-        GameManager.Instance.GameStart();
     }
 
     public void ExitButtonClick()
