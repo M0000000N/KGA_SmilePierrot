@@ -39,19 +39,19 @@ public class GameManager : SingletonBehaviour<GameManager>
 
     public void GameOver()
     {
-        UnityEngine.Debug.Log("°ÔÀÓ¿À¹ö");
+        UnityEngine.Debug.Log("ê²Œì„ì˜¤ë²„");
         UIManager.Instance.InGameUI.gameObject.SetActive(false);
         UIManager.Instance.GameOverUI.gameObject.SetActive(true);
     }
 
-    public void GameStart() // ·£´ıÀ¸·Î ÆĞ³Î º¸¿©ÁÖ±â
+    public void GameStart() // ëœë¤ìœ¼ë¡œ íŒ¨ë„ ë³´ì—¬ì£¼ê¸°
     {
         if (Stage == 1)
         {
             pannel.StartCoroutine("SetPannelColorCoroutine");
             if (Input.GetKeyDown(KeyCode.E))
             {
-                // TODO : ½ºÅ×ÀÌÁö 1Àº E¸¦ ´­·¯¾ß ½ÃÀÛÇÒ ¼ö ÀÖµµ·Ï º¯°æ ÇÊ¿ä
+                // TODO : ìŠ¤í…Œì´ì§€ 1ì€ Eë¥¼ ëˆŒëŸ¬ì•¼ ì‹œì‘í•  ìˆ˜ ìˆë„ë¡ ë³€ê²½ í•„ìš”
             }
         }
         else
@@ -62,9 +62,9 @@ public class GameManager : SingletonBehaviour<GameManager>
 
     public void NextStage()
     {
-        if(Stage >= MAXSTAGE) // TODO : ³ªÁß¿¡ ¸ÅÁ÷³Ñ¹ö ¹Ù²ãÁÖ¼¼¿ä.
+        if(Stage >= MAXSTAGE) // TODO : ë‚˜ì¤‘ì— ë§¤ì§ë„˜ë²„ ë°”ê¿”ì£¼ì„¸ìš”.
         {
-            // °ÔÀÓ Å¬¸®¾î ¾ÀÀ¸·Î ÀÌµ¿À» ÇÏ´ø°¡ ÇÏ°ÚÁÒ
+            // ê²Œì„ í´ë¦¬ì–´ ì”¬ìœ¼ë¡œ ì´ë™ì„ í•˜ë˜ê°€ í•˜ê² ì£ 
             return;
         }
 

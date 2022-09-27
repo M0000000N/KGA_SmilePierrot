@@ -5,12 +5,12 @@ using UnityEngine;
 public class PlayController : MonoBehaviour
 {
     [SerializeField]
-    private float turnSpeed = 4.0f; // ¸¶¿ì½º È¸Àü ¼Óµµ
+    private float turnSpeed = 4.0f; // ë§ˆìš°ìŠ¤ íšŒì „ ì†ë„
 
     [SerializeField]
     private float lookSensitivity;
 
-    //Ä«¸Ş¶ó °¢µµ Á¦ÇÑ 
+    //ì¹´ë©”ë¼ ê°ë„ ì œí•œ 
     [SerializeField]
     private float cameraRotationLimit;
     private float currentCameraRotationX = 0f;
@@ -24,13 +24,14 @@ public class PlayController : MonoBehaviour
         cameraRotation();
     }
 
-    //»óÇÏ 
+    //ìƒí•˜ 
     private void cameraRotation()
     {
         float xRotation = Input.GetAxisRaw("Mouse Y");
         float cameraRotationX = xRotation * lookSensitivity;
         currentCameraRotationX -= cameraRotationX;
-        currentCameraRotationX = Mathf.Clamp(currentCameraRotationX, -cameraRotationLimit, cameraRotationLimit); // °¢µµ Á¦ÇÑ 
+
+        currentCameraRotationX = Mathf.Clamp(currentCameraRotationX, -cameraRotationLimit, cameraRotationLimit); // ê°ë„ ì œí•œ 
 
         float yRotation = Input.GetAxisRaw("Mouse X");
         float cameraRotationY = yRotation * lookSensitivity; 
