@@ -1,4 +1,3 @@
-//using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,7 +17,6 @@ public class Pannel : MonoBehaviour
 
     public Material pannelColor; // 현재 패널 컬러
     public Material[] RandomMaterial; // 랜덤으로 저장될 색
-    public bool ShowAll;
 
     private List<int> csvColorIndex;
 
@@ -34,14 +32,13 @@ public class Pannel : MonoBehaviour
 
     public void Initialize()
     {
-        ShowAll = false;
+        GameManager.Instance.CanSelectSkull = false;
         
         csvColorIndex = CSVParser.Instance.GetColorIndex(GameManager.Instance.Stage);
         ResourceMaterial = Resources.LoadAll<Material>("MaterialColor");
         RandomMaterial = new Material[RememberCount];
 
         SetRandomRememberColor();
-        StartCoroutine("SetPannelColorCoroutine");
     }
 
     public void SetRandomRememberColor()
@@ -61,19 +58,21 @@ public class Pannel : MonoBehaviour
         }
     }
 
-    IEnumerator SetPannelColorCoroutine()
+    public IEnumerator SetPannelColorCoroutine()
     {
         int index = 0;
+        UIManager.Instance.InGameUI.AnswerText.text = "답 : ";
         while (index < RememberCount)
         {
             SetPannelColor(index);
             colorText.text = colorTextArray[int.Parse(pannelColor.name) - 1];
-            Debug.Log(index + "번째 색상 : " + pannelColor);
+            UIManager.Instance.InGameUI.AnswerText.text += pannelColor.name + " / ";
             yield return new WaitForSeconds(delayTime);
             index++;
         }
-        ShowAll = true;
-        Debug.Log("멈춘다");
+        GameManager.Instance.CanSelectSkull = true;
+        Debug.Log("맞춰봐라!");
+        UIManager.Instance.InGameUI.StartTimeLimit();
         yield break;
     }
 

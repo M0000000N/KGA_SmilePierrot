@@ -23,11 +23,11 @@ public class DrumRecognize : MonoBehaviour
         ColorDrum();
     }
 
-    private void ColorDrum()
+    private void ColorDrum()    
     {
         Debug.DrawRay(transform.position, transform.forward.normalized * 5f, Color.red);
 
-        if (Input.GetMouseButtonDown(0) && pannel.ShowAll)
+        if (Input.GetMouseButtonDown(0) && GameManager.Instance.CanSelectSkull)
         {           
             layerMask = 1 << LayerMask.NameToLayer("Drum");
 
@@ -60,7 +60,6 @@ public class DrumRecognize : MonoBehaviour
             {
                 GameManager.Instance.NextStage();
                 clickCount = 0;
-                pannel.Initialize();
             }
         }
     }

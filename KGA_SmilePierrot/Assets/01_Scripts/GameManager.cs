@@ -5,50 +5,91 @@ using UnityEngine;
 public class GameManager : SingletonBehaviour<GameManager>
 {
     public int HP;
+    
     public int Stage;
+    public int ClickCount;
 
-    void Start()
+    public bool CanSelectSkull;
+
+    public int MAXSTAGE;
+
+    public Pannel pannel;
+
+    private void Awake()
     {
         Initialize();
     }
 
-    void Initialize()
+    private void Initialize()
     {
-        HP = 3;
+        HP = 5;
+        ClickCount = 0;
         Stage = 1;
     }
 
     public void Damaged()
     {
         HP--;
-        UnityEngine.Debug.Log("HP : " + HP);
-        if( HP <= 0)
+        UIManager.Instance.InGameUI.SetHp(HP);
+        if (HP <= 0)
         {
-            // °ÔÀÓ¿À¹ö
-            UnityEngine.Debug.Log("°ÔÀÓ¿À¹ö");
+            GameOver();
+        }
+    }
+
+    public void GameOver()
+    {
+        UnityEngine.Debug.Log("ê²Œì„ì˜¤ë²„");
+        UIManager.Instance.InGameUI.gameObject.SetActive(false);
+        UIManager.Instance.GameOverUI.gameObject.SetActive(true);
+    }
+
+    public void GameStart() // ëœë¤ìœ¼ë¡œ íŒ¨ë„ ë³´ì—¬ì£¼ê¸°
+    {
+        if (Stage == 1)
+        {
+            pannel.StartCoroutine("SetPannelColorCoroutine");
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                // TODO : ìŠ¤í…Œì´ì§€ 1ì€ Eë¥¼ ëˆŒëŸ¬ì•¼ ì‹œì‘í•  ìˆ˜ ìˆë„ë¡ ë³€ê²½ í•„ìš”
+            }
         }
         else
         {
-            Stage++;
-            UnityEngine.Debug.Log("ÇöÀç ½ºÅ×ÀÌÁö : " + Stage);
-            // ´ÙÀ½ ½ºÅ×ÀÌÁö
+            pannel.StartCoroutine("SetPannelColorCoroutine");
         }
     }
 
     public void NextStage()
     {
+        if(Stage >= MAXSTAGE) // TODO : ë‚˜ì¤‘ì— ë§¤ì§ë„˜ë²„ ë°”ê¿”ì£¼ì„¸ìš”.
+        {
+            // ê²Œì„ í´ë¦¬ì–´ ì”¬ìœ¼ë¡œ ì´ë™ì„ í•˜ë˜ê°€ í•˜ê² ì£ 
+            return;
+        }
+
         Stage++;
+        ClickCount = 0;
+        UIManager.Instance.InGameUI.SetStageText(Stage);
+        pannel.Initialize();
+        GameStart();
     }
 
-    public bool IsRightColor(int _colorType)
+    public void CheckColor(Color _color)
     {
-        if(true) // ÃßÈÄ ÇÃ·¹ÀÌ¾î ¼±ÅÃ »ö»ó(_colorType)°ú CSV ´ä°ú ºñ±³ÇÏ´Â ÄÚµå Ãß°¡ ÇÊ¿ä
+        if (pannel.RandomMaterial[ClickCount].color == _color)
         {
-            return true;
+            ClickCount++;
+            UnityEngine.Debug.Log(ClickCount);
+            if(pannel.RandomMaterial.Length <= ClickCount)
+            {
+                NextStage();
+            }
         }
         else
         {
-            return false;
+            Damaged();
+            NextStage();
         }
     }
 }

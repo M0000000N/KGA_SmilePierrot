@@ -21,10 +21,13 @@ public class DataTable // 실제 데이터와 이름이 같아야한다.
 public class CSVParser : SingletonBehaviour<CSVParser>
 {
     private Dictionary<int, DataTable> dataTable = new Dictionary<int, DataTable>();
+
+    [SerializeField] string csv;
+
     private void Awake()
     {
         // 1. 리소스 폴더에서 csv 로드
-        TextAsset csvTextAsset = Resources.Load<TextAsset>("CSV/stage_DB_ver1.2");
+        TextAsset csvTextAsset = Resources.Load<TextAsset>("CSV/"+csv);
 
         // 2. csv파일 설정 - CsvReader의 매개변수 Configuration에 들어갈 변수
         CsvConfiguration config = new CsvConfiguration(CultureInfo.InvariantCulture)

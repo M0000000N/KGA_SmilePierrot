@@ -34,11 +34,11 @@ public class PlayController : MonoBehaviour
         currentCameraRotationX = Mathf.Clamp(currentCameraRotationX, -cameraRotationLimit, cameraRotationLimit); // 각도 제한 
 
         float yRotation = Input.GetAxisRaw("Mouse X");
-        float cameraRotationY = yRotation * lookSensitivity;
+        float cameraRotationY = yRotation * lookSensitivity; 
         currentCameraRotationY += cameraRotationY;
         currentCameraRotationY = Mathf.Clamp(currentCameraRotationY, -cameraRotationLimit, cameraRotationLimit);
 
-        camera.transform.localEulerAngles = new Vector3(currentCameraRotationX, currentCameraRotationY, 0f);
+        camera.transform.localEulerAngles = new Vector3(currentCameraRotationX, currentCameraRotationY, 0);
     }
   
 }
