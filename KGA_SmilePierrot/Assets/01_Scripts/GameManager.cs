@@ -36,6 +36,7 @@ public class GameManager : SingletonBehaviour<GameManager>
         IsInGame = false;
         IsPause = false;
         SelectSkull.Initialize();
+        UIManager.Instance.Initialize();
     }
 
     public void Damaged()
