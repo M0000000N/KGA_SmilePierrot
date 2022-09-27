@@ -18,7 +18,7 @@ public class SkullColor : MonoBehaviour
 
     private void Start()
     {
-        anim = GetComponent<Animator>();  
+        //anim = GetComponent<Animator>();  
     }
     private void Update()
     {
@@ -26,20 +26,18 @@ public class SkullColor : MonoBehaviour
     }
     private void SkullColorCheck()
     {
-        Debug.DrawRay(transform.position, transform.right.normalized * 5f, Color.red);
+        Debug.DrawRay(transform.position, transform.forward.normalized * 5f, Color.red) ;
        
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && GameManager.Instance.CanSelectSkull)
         {
             anim.SetTrigger("MagicSitck");
-            Debug.Log("¾Æ¾Æ"); 
             layerMask = LayerMask.GetMask("Skull");
 
-            if (Physics.Raycast(transform.position, transform.right, out hitInfo, 60f, layerMask) == false)
+            if (Physics.Raycast(transform.position, transform.forward, out hitInfo, 60f, layerMask))
             {
-                return;
+                Color color = hitInfo.transform.GetComponent<Renderer>().material.color;
+                GameManager.Instance.CheckColor(color);
             }
-
-            Debug.Log(hitInfo.transform.gameObject.name);
         }
     }
 }

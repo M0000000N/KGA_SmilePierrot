@@ -12,6 +12,12 @@ public class UIManager : SingletonBehaviour<UIManager>
 
     private void Awake()
     {
+        MainUI = GetComponentInChildren<MainUI>();
+        GameStartPopUpUI = GetComponentInChildren<GameStartPopUpUI>();
+        InGameUI = GetComponentInChildren<InGameUI>();
+        MenuPopUpUI = GetComponentInChildren<MenuPopUpUI>();
+        GameOverUI = GetComponentInChildren<GameOverUI>();
+
         Initialize();
     }
     private void Update()

@@ -27,7 +27,7 @@ public class DrumRecognize : MonoBehaviour
     {
         Debug.DrawRay(transform.position, transform.forward.normalized * 5f, Color.red);
 
-        if (Input.GetMouseButtonDown(0) && pannel.ShowAll)
+        if (Input.GetMouseButtonDown(0) && GameManager.Instance.CanSelectSkull)
         {           
             layerMask = 1 << LayerMask.NameToLayer("Drum");
 
