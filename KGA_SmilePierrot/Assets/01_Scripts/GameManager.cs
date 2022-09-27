@@ -11,13 +11,19 @@ public class GameManager : SingletonBehaviour<GameManager>
 
     public bool CanSelectSkull;
 
+    public Pannel Pannel;
+    public Skull Skull;
+    
+    [Header("테스트값")]
     public int MAXSTAGE;
+    public int[] LimitTime;
 
-    public Pannel pannel;
+
 
     private void Awake()
     {
         Initialize();
+        LimitTime = new int[MAXSTAGE];
     }
 
     private void Initialize()
@@ -48,7 +54,7 @@ public class GameManager : SingletonBehaviour<GameManager>
     {
         if (Stage == 1)
         {
-            pannel.StartCoroutine("SetPannelColorCoroutine");
+            Pannel.StartCoroutine("SetPannelColorCoroutine",1f);
             if (Input.GetKeyDown(KeyCode.E))
             {
                 // TODO : 스테이지 1은 E를 눌러야 시작할 수 있도록 변경 필요
@@ -56,7 +62,7 @@ public class GameManager : SingletonBehaviour<GameManager>
         }
         else
         {
-            pannel.StartCoroutine("SetPannelColorCoroutine");
+            Pannel.StartCoroutine("SetPannelColorCoroutine",2f);
         }
     }
 
@@ -69,19 +75,25 @@ public class GameManager : SingletonBehaviour<GameManager>
         }
 
         Stage++;
+        SetStage();
+    }
+
+    public void SetStage()
+    {
         ClickCount = 0;
         UIManager.Instance.InGameUI.SetStageText(Stage);
-        pannel.Initialize();
+        Pannel.Initialize();
+        Skull.Initialize();
         GameStart();
     }
 
     public void CheckColor(Color _color)
     {
-        if (pannel.RandomMaterial[ClickCount].color == _color)
+        if (Pannel.RandomColor[ClickCount] == _color)
         {
             ClickCount++;
             UnityEngine.Debug.Log(ClickCount);
-            if(pannel.RandomMaterial.Length <= ClickCount)
+            if(Pannel.RandomColor.Length <= ClickCount)
             {
                 NextStage();
             }
@@ -89,7 +101,7 @@ public class GameManager : SingletonBehaviour<GameManager>
         else
         {
             Damaged();
-            NextStage();
+            SetStage();
         }
     }
 }

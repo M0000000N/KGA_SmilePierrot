@@ -19,9 +19,23 @@ public class PlayController : MonoBehaviour
     [SerializeField]
     private Camera camera;
 
+    private void Start()
+    {
+        Initialize();
+    }
+
+    public void Initialize()
+    {
+        currentCameraRotationX = 0f;
+        currentCameraRotationY = 0f;
+    }
+
     void Update()
     {
-        cameraRotation();
+        if(true)
+        {
+            cameraRotation();
+        }
     }
 
     //상하 

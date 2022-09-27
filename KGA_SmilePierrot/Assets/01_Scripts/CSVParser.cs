@@ -13,10 +13,7 @@ public class DataTable // 실제 데이터와 이름이 같아야한다.
 {
     public int ID { get; set; }
     public string Stage { get; set; }
-    public string color_1 { get; set; }
-    public string color_2 { get; set; }
-    public string color_3 { get; set; }
-    public string color_4 { get; set; }
+    public string Remember_count { get; set; }
 }
 public class CSVParser : SingletonBehaviour<CSVParser>
 {
@@ -57,7 +54,7 @@ public class CSVParser : SingletonBehaviour<CSVParser>
         }
     }
 
-    private DataTable GetCsvData(int _index) // 인덱스로 원하는 데이터를 찾는다.
+    public DataTable GetCsvData(int _index) // 인덱스로 원하는 데이터를 찾는다.
     {
         return dataTable[_index];
     }
@@ -67,26 +64,26 @@ public class CSVParser : SingletonBehaviour<CSVParser>
     /// </summary>
     /// <param name="_index">스테이지</param>
     /// <returns></returns>
-    public List<int> GetColorIndex(int _index)
-    {
-        List<int> colorIndexList = new List<int>();
+    //public List<int> GetColorIndex(int _index)
+    //{
+    //    List<int> colorIndexList = new List<int>();
 
-        if (GetCsvData(_index).color_1 == "1")
-        {
-            colorIndexList.Add(1);
-        }
-        if (GetCsvData(_index).color_2 == "1")
-        {
-            colorIndexList.Add(2);
-        }
-        if (GetCsvData(_index).color_3 == "1")
-        {
-            colorIndexList.Add(3);
-        }
-        if (GetCsvData(_index).color_4 == "1")
-        {
-            colorIndexList.Add(4);
-        }
-        return colorIndexList;
-    }
+    //    if (GetCsvData(_index).color_1 == "1")
+    //    {
+    //        colorIndexList.Add(1);
+    //    }
+    //    if (GetCsvData(_index).color_2 == "1")
+    //    {
+    //        colorIndexList.Add(2);
+    //    }
+    //    if (GetCsvData(_index).color_3 == "1")
+    //    {
+    //        colorIndexList.Add(3);
+    //    }
+    //    if (GetCsvData(_index).color_4 == "1")
+    //    {
+    //        colorIndexList.Add(4);
+    //    }
+    //    return colorIndexList;
+    //}
 }

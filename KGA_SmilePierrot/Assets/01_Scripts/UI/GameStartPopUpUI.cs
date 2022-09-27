@@ -21,7 +21,7 @@ public class GameStartPopUpUI : MonoBehaviour
         UIManager.Instance.InGameUI.gameObject.SetActive(true);
 
         Debug.Log("게임시작");
-        GameManager.Instance.GameStart();
-
+        Camera.main.transform.localEulerAngles = Vector3.zero;
+        // GameManager.Instance.GameStart(); // 팝업만 닫히고 Start는 지팡이와 상호작용한 후로 변경
     }
 }
