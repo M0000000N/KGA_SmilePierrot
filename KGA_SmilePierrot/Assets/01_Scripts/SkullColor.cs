@@ -30,6 +30,7 @@ public class SkullColor : MonoBehaviour
         {
             anim.SetTrigger("MagicSitck");
             SoundManager.Instance.setEffect(magicStick_Sound); 
+           
             layerMask = LayerMask.GetMask("Skull");
 
             if (Physics.Raycast(transform.position, transform.forward, out hitInfo, 60f, layerMask))
@@ -38,5 +39,6 @@ public class SkullColor : MonoBehaviour
                 GameManager.Instance.CheckColor(color);
             }
         }
+        
     }
 }

@@ -43,6 +43,9 @@ public class SoundManager : SingletonBehaviour<SoundManager>
         audioClipDic.Add(name, audioEffect[4]);
         name = "wandhit";
         audioClipDic.Add(name, audioEffect[5]);
+        name = "getwand";
+        audioClipDic.Add(name, audioEffect[6]);
+
         //BGM 
         //audioClipDic.Add(name, audioBGM[6]);
         name = "GameScene"; // BGM
@@ -57,18 +60,29 @@ public class SoundManager : SingletonBehaviour<SoundManager>
         BGM = GetComponent<AudioSource>();  
         BGM.clip = audioBGM;
         BGM.PlayOneShot(audioBGM);
-
+        
     }
+ 
+
     public void setEffect(string name)
-    {
+    {    
         Debug.Log(audioClipDic[name]);
-        effect.PlayOneShot(audioClipDic[name]); // 오류뜨네..
+
+        if (audioClipDic.TryGetValue(name, out AudioClip audioClip))
+        {
+           effect.PlayOneShot(audioClipDic[name]); // 오류뜨네..
+        }
     }
 
     // 메인메뉴 넘어갈 때 
     public void StopBGM()
     {
         BGM.Stop(); 
+    }
+
+    public void StopEffect()
+    {
+        effect.Stop();
     }
 
     //// BGM 부분
@@ -89,6 +103,6 @@ public class SoundManager : SingletonBehaviour<SoundManager>
     //    }
 
     //}
-  
-   }
+
+}
 
