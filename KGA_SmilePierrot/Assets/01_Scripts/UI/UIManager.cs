@@ -30,6 +30,7 @@ public class UIManager : SingletonBehaviour<UIManager>
         {
             MenuPopUpUI.gameObject.SetActive(true);
             GameManager.Instance.Pause();
+            GameManager.Instance.IsCursorOn(true);
         }
     }
 

@@ -26,13 +26,12 @@ public class GameOverUI : MonoBehaviour
         GameManager.Instance.IsInGame = true;
 
         SoundManager.Instance.setEffect(buttonClick_Sound);
-        Debug.Log("다시 플레이 할게요");
+        GameManager.Instance.IsCursorOn(false);
     }
     public void NoButtonClick()
     {
         gameObject.SetActive(false);
         UIManager.Instance.MainUI.gameObject.SetActive(true);
         SoundManager.Instance.setEffect(buttonClick_Sound);
-        Debug.Log("다시 플레이 안해");
     }
 }

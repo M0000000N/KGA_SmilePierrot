@@ -57,6 +57,7 @@ public class GameManager : SingletonBehaviour<GameManager>
         UnityEngine.Debug.Log("게임오버");
         UIManager.Instance.InGameUI.gameObject.SetActive(false);
         UIManager.Instance.GameOverUI.gameObject.SetActive(true);
+        GameManager.Instance.IsCursorOn(true);
         Pannel.StopAllCoroutines();
         IsInGame = false;
     }
@@ -84,6 +85,7 @@ public class GameManager : SingletonBehaviour<GameManager>
         if (Stage > MAXSTAGE) // TODO : 나중에 매직넘버 바꿔주세요.
         {
             UIManager.Instance.ClearUI.gameObject.SetActive(true);
+            GameManager.Instance.IsCursorOn(true);
             return;
         }
 
@@ -121,5 +123,19 @@ public class GameManager : SingletonBehaviour<GameManager>
     {
         IsPause = true;
         Time.timeScale = 0;
+    }
+
+    public void IsCursorOn(bool _isOn)
+    {
+        if(_isOn)
+        {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+        }
+        else
+        {
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+        }
     }
 }

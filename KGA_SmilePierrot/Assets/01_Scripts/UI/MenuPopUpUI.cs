@@ -17,6 +17,7 @@ public class MenuPopUpUI : MonoBehaviour
     public void ResumeButtonCilck()
     {
         gameObject.SetActive(false);
+        GameManager.Instance.IsCursorOn(false);
         GameManager.Instance.IsPause = false;
         Time.timeScale = 1;
     }

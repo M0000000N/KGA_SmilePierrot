@@ -23,5 +23,7 @@ public class GameStartPopUpUI : MonoBehaviour
         Debug.Log("게임시작");
         GameManager.Instance.Initialize();
         GameManager.Instance.IsInGame = true;
+
+        GameManager.Instance.IsCursorOn(false);
     }
 }
