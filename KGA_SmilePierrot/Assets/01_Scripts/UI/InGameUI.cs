@@ -63,7 +63,7 @@ public class InGameUI : MonoBehaviour
 
     public void StartTimeLimit()
     {
-        ProgressBar.value -= Time.deltaTime / GameManager.Instance.LimitTime[GameManager.Instance.Stage];
+        ProgressBar.value -= Time.deltaTime / GameManager.Instance.LimitTime[GameManager.Instance.Stage - 1];
         if (ProgressBar.value <= 0)
         {
             GameManager.Instance.Damaged();

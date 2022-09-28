@@ -42,9 +42,9 @@ public class Pannel : MonoBehaviour
             int randNum = Random.Range(0, rememberCount);
             isdone[i] = randNum;
 
-            if(i>=2)
+            if (i >= 2)
             {
-                while(isdone[i] == isdone[i-1] && isdone[i] == isdone[i-2])
+                while (isdone[i] == isdone[i - 1] && isdone[i] == isdone[i - 2])
                 {
                     randNum = Random.Range(0, rememberCount);
                     isdone[i] = randNum;
@@ -67,7 +67,7 @@ public class Pannel : MonoBehaviour
             yield return new WaitForSeconds(0.2f);
 
             SetPannelColor(index);
-            yield return new WaitForSeconds(GameManager.Instance.PannelDelayTime[GameManager.Instance.Stage]);
+            yield return new WaitForSeconds(GameManager.Instance.PannelDelayTime[GameManager.Instance.Stage - 1]);
 
             index++;
         }

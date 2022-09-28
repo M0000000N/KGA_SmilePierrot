@@ -78,13 +78,14 @@ public class GameManager : SingletonBehaviour<GameManager>
 
     public void NextStage()
     {
-        if (Stage >= MAXSTAGE) // TODO : 나중에 매직넘버 바꿔주세요.
+        Stage++;
+
+        if (Stage > MAXSTAGE) // TODO : 나중에 매직넘버 바꿔주세요.
         {
             UIManager.Instance.ClearUI.gameObject.SetActive(true);
             return;
         }
 
-        Stage++;
         SetStage();
         GameStart();
     }
