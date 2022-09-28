@@ -34,6 +34,7 @@ public class GameManager : SingletonBehaviour<GameManager>
         CanSelectSkull = false;
         SelectSkull.Initialize();
         PlayController.Initialize();
+        Skull.Initialize();
         UIManager.Instance.InGameUI.RefreshUI();
     }
 
