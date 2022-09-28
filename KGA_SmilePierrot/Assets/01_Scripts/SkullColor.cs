@@ -6,7 +6,6 @@ using UnityEngine;
 public class SkullColor : MonoBehaviour
 {
     private RaycastHit hitInfo;
-
     private int layerMask;
     private int clickCount; 
 
@@ -16,10 +15,9 @@ public class SkullColor : MonoBehaviour
     [SerializeField]
     private GameObject[] Skull;
 
-    private void Start()
-    {
-        //anim = GetComponent<Animator>();  
-    }
+    [SerializeField]
+    private string magicStick_Sound; 
+
     private void Update()
     {
         SkullColorCheck(); 
@@ -31,6 +29,7 @@ public class SkullColor : MonoBehaviour
         if (Input.GetMouseButtonDown(0) && GameManager.Instance.CanSelectSkull)
         {
             anim.SetTrigger("MagicSitck");
+            SoundManager.Instance.setEffect(magicStick_Sound); 
             layerMask = LayerMask.GetMask("Skull");
 
             if (Physics.Raycast(transform.position, transform.forward, out hitInfo, 60f, layerMask))
