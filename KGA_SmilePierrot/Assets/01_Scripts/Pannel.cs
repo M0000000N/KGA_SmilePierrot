@@ -25,26 +25,32 @@ public class Pannel : MonoBehaviour
     {
         GameManager.Instance.CanSelectSkull = false;
         RandomColor = new Color[int.Parse(CSVParser.Instance.GetCsvData(GameManager.Instance.Stage).Remember_count)];
+        pannelRenderer.material.color = new Color(0.5f, 0.5f, 0.5f);
 
         SetRandomRememberColor();
     }
 
     public void SetRandomRememberColor()
     {
-        int[] isdone = new int[int.Parse(CSVParser.Instance.GetCsvData(GameManager.Instance.Stage).Remember_count)]; 
         UIManager.Instance.InGameUI.AnswerText.text = "´ä : ";
 
-        for (int i = 0; i < int.Parse(CSVParser.Instance.GetCsvData(GameManager.Instance.Stage).Remember_count); i++)
+        int rememberCount = int.Parse(CSVParser.Instance.GetCsvData(GameManager.Instance.Stage).Remember_count);
+        int[] isdone = new int[rememberCount];
+
+        for (int i = 0; i < rememberCount; i++)
         {
-            int randNum = Random.Range(0, int.Parse(CSVParser.Instance.GetCsvData(GameManager.Instance.Stage).Remember_count));
-            isdone[randNum]++;
-            //if (isdone[randNum] > 2)
-            //{
-            //    i--;
-            //    continue;
-            //}
-            UnityEngine.Debug.Log(GameManager.Instance.Skull.skulls[randNum]);
-            UnityEngine.Debug.Log(GameManager.Instance.Skull.skulls[randNum].GetComponent<Renderer>().material.color);
+            int randNum = Random.Range(0, rememberCount);
+            isdone[i] = randNum;
+
+            if(i>=2)
+            {
+                while(isdone[i] == isdone[i-1] && isdone[i] == isdone[i-2])
+                {
+                    randNum = Random.Range(0, rememberCount);
+                    isdone[i] = randNum;
+                }
+            }
+
             RandomColor[i] = GameManager.Instance.Skull.skulls[randNum].GetComponent<Renderer>().material.color;
             UIManager.Instance.InGameUI.AnswerText.text += GameManager.Instance.Skull.skulls[randNum].name + " / ";
         }

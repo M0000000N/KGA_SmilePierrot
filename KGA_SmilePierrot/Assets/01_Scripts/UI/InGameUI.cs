@@ -66,7 +66,8 @@ public class InGameUI : MonoBehaviour
         ProgressBar.value -= Time.deltaTime / GameManager.Instance.LimitTime[GameManager.Instance.Stage];
         if (ProgressBar.value <= 0)
         {
-            GameManager.Instance.GameOver();
+            GameManager.Instance.Damaged();
+            GameManager.Instance.SetStage();
             return;
         }
     }
