@@ -5,26 +5,41 @@ using UnityEngine;
 public class GameManager : SingletonBehaviour<GameManager>
 {
     public int HP;
-    
+
     public int Stage;
     public int ClickCount;
 
     public bool CanSelectSkull;
 
+    public Pannel Pannel;
+    public Skull Skull;
+    public SelectSkull SelectSkull;
+    public PlayController PlayController;
+
+    [Header("테스트값")]
     public int MAXSTAGE;
+    public float[] LimitTime;
+    public float[] PannelDelayTime;
 
-    public Pannel pannel;
+    public bool IsInGame;
+    public bool IsPause;
 
-    private void Awake()
-    {
-        Initialize();
-    }
-
-    private void Initialize()
+    [SerializeField] private string gameScene_sound;
+    [SerializeField] private string gameover_Sound;
+    [SerializeField] private string right_Sound;
+    [SerializeField] private string wrong_Sound;
+    public void Initialize()
     {
         HP = 5;
         ClickCount = 0;
         Stage = 1;
+
+        IsPause = false;
+        CanSelectSkull = false;
+        SelectSkull.Initialize();
+        PlayController.Initialize();
+        Skull.Initialize();
+        UIManager.Instance.InGameUI.RefreshUI();
     }
 
     public void Damaged()
@@ -35,6 +50,10 @@ public class GameManager : SingletonBehaviour<GameManager>
         {
             GameOver();
         }
+        else
+        {
+            GameStart();
+        }
     }
 
     public void GameOver()
@@ -42,46 +61,58 @@ public class GameManager : SingletonBehaviour<GameManager>
         UnityEngine.Debug.Log("게임오버");
         UIManager.Instance.InGameUI.gameObject.SetActive(false);
         UIManager.Instance.GameOverUI.gameObject.SetActive(true);
+        GameManager.Instance.IsCursorOn(true);
+        SoundManager.Instance.setEffect(gameover_Sound);
+        Pannel.StopAllCoroutines();
+        IsInGame = false;
     }
 
     public void GameStart() // 랜덤으로 패널 보여주기
     {
+        Pannel.Initialize();
         if (Stage == 1)
         {
-            pannel.StartCoroutine("SetPannelColorCoroutine");
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                // TODO : 스테이지 1은 E를 눌러야 시작할 수 있도록 변경 필요
-            }
+            Pannel.StartCoroutine("SetPannelColorCoroutine", 1f);
         }
         else
         {
-            pannel.StartCoroutine("SetPannelColorCoroutine");
+            Pannel.StartCoroutine("SetPannelColorCoroutine", 2f);
         }
+        ClickCount = 0;
+        UIManager.Instance.InGameUI.SetStageText(Stage);
+        UIManager.Instance.InGameUI.SetHp(HP);
     }
 
     public void NextStage()
     {
-        if(Stage >= MAXSTAGE) // TODO : 나중에 매직넘버 바꿔주세요.
+        Stage++;
+
+        if (Stage > MAXSTAGE) // TODO : 나중에 매직넘버 바꿔주세요.
         {
-            // 게임 클리어 씬으로 이동을 하던가 하겠죠
+            UIManager.Instance.ClearUI.gameObject.SetActive(true);
+            GameManager.Instance.IsCursorOn(true);
             return;
         }
 
-        Stage++;
+        SetStage();
+        GameStart();
+    }
+
+    public void SetStage()
+    {
         ClickCount = 0;
         UIManager.Instance.InGameUI.SetStageText(Stage);
-        pannel.Initialize();
-        GameStart();
+        Pannel.Initialize();
+        Skull.Initialize();
     }
 
     public void CheckColor(Color _color)
     {
-        if (pannel.RandomMaterial[ClickCount].color == _color)
+        if (Pannel.RandomColor[ClickCount] == _color)
         {
             ClickCount++;
             UnityEngine.Debug.Log(ClickCount);
-            if(pannel.RandomMaterial.Length <= ClickCount)
+            if (Pannel.RandomColor.Length <= ClickCount)
             {
                 NextStage();
             }
@@ -89,7 +120,28 @@ public class GameManager : SingletonBehaviour<GameManager>
         else
         {
             Damaged();
-            NextStage();
+            SetStage();
+        }
+    }
+
+    public void Pause()
+    {
+        IsPause = true;
+        Time.timeScale = 0;
+    }
+
+    public void IsCursorOn(bool _isOn)
+    {
+        if (_isOn)
+        {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+        }
+        else
+        {
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
         }
     }
 }
+

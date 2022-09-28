@@ -6,6 +6,8 @@ public class MainUI : MonoBehaviour
 {
     public Transform InitTransform;
 
+    [SerializeField]
+    private string buttonClick_Sound;
     public void Initialize()
     {
         InitTransform = this.transform.parent.transform;
@@ -16,18 +18,20 @@ public class MainUI : MonoBehaviour
 
     public void GameStartButtonClick()
     {
+        SoundManager.Instance.setEffect(buttonClick_Sound);
         UIManager.Instance.GameStartPopUpUI.gameObject.SetActive(true);
     }
 
     public void ExitButtonClick()
     {
-        Application.Quit();
+        SoundManager.Instance.setEffect(buttonClick_Sound);
         Debug.Log("게임종료");
     }
 
     public void CreditButtonClick()
     {
-        // 제작 UI 추가예정
-        Debug.Log("제작");
+        SoundManager.Instance.setEffect(buttonClick_Sound);
+        gameObject.SetActive(false);
+        UIManager.Instance.CreditUI.gameObject.SetActive(true);
     }
 }

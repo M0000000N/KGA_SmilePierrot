@@ -9,7 +9,7 @@ public class SoundManager : SingletonBehaviour<SoundManager>
     public AudioSource BGM; 
 
     [SerializeField] AudioClip[] audioEffect;
-    [SerializeField] AudioClip audioBGM;
+    [SerializeField] AudioClip audioBGM; 
 
    Dictionary<string, AudioClip> audioClipDic;
     private void Awake()
@@ -20,17 +20,14 @@ public class SoundManager : SingletonBehaviour<SoundManager>
         }
     }
 
-        //foreach (AudioClip audio in audioEffect)
-        //{
-        
-        //}
     private void Start()
     {
         effect = GetComponent<AudioSource>();
+        BGM = gameObject.AddComponent<AudioSource>();
+        BGM.volume = 0.1f;
 
         audioClipDic = new Dictionary<string, AudioClip>();
 
-        // audioClipDic.Add(audio.name, audio);
         name = "fail";
         audioClipDic.Add(name, audioEffect[0]);
         name = "Victory";
@@ -46,31 +43,25 @@ public class SoundManager : SingletonBehaviour<SoundManager>
         name = "getwand";
         audioClipDic.Add(name, audioEffect[6]);
 
-        //BGM 
-        //audioClipDic.Add(name, audioBGM[6]);
-        name = "GameScene"; // BGM
+        name = "GameScene"; 
         audioClipDic.Add(name, audioBGM);
 
     }
 
-    public void SetBGM()
+    public void SetBGM(string name)
     {
-        if (audioBGM == null) return;
-
-        BGM = GetComponent<AudioSource>();  
-        BGM.clip = audioBGM;
-        BGM.PlayOneShot(audioBGM);
-        
+        BGM.clip = audioClipDic[name];
+        BGM.PlayOneShot(audioBGM); 
     }
- 
 
     public void setEffect(string name)
-    {    
-        Debug.Log(audioClipDic[name]);
+    {
+        Debug.Log(name);
 
-        if (audioClipDic.TryGetValue(name, out AudioClip audioClip))
+        if (audioClipDic.TryGetValue(name, out AudioClip audioClip)) // 널레퍼런스 
         {
-           effect.PlayOneShot(audioClipDic[name]); // 오류뜨네..
+            effect.clip = audioClipDic[name];
+            effect.Play();
         }
     }
 
@@ -85,24 +76,6 @@ public class SoundManager : SingletonBehaviour<SoundManager>
         effect.Stop();
     }
 
-    //// BGM 부분
-    //private void PlayBGM()
-    //{
-    //   if(audioClipDic.TryGetValue("fail.mp3", out AudioClip audioClip))
-    //    {
-    //        audio.PlayOneShot(audioClip); 
-    //    }
-    //}
-
-    //// EFFECT 부분 
-    //private void PlayEffect(string name)
-    //{
-    //    if(audioClipDic.TryGetValue(name, out AudioClip audioClip))
-    //    {
-
-    //    }
-
-    //}
 
 }
 

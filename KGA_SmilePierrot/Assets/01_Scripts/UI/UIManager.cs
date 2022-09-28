@@ -9,7 +9,10 @@ public class UIManager : SingletonBehaviour<UIManager>
     public InGameUI InGameUI;
     public MenuPopUpUI MenuPopUpUI;
     public GameOverUI GameOverUI;
+    public CreditUI CreditUI;
+    public ClearUI ClearUI;
 
+    [SerializeField] private string mainScene_sound;
     private void Awake()
     {
         MainUI = GetComponentInChildren<MainUI>();
@@ -17,9 +20,16 @@ public class UIManager : SingletonBehaviour<UIManager>
         InGameUI = GetComponentInChildren<InGameUI>();
         MenuPopUpUI = GetComponentInChildren<MenuPopUpUI>();
         GameOverUI = GetComponentInChildren<GameOverUI>();
-
+        CreditUI = GetComponentInChildren<CreditUI>();
+        ClearUI = GetComponentInChildren<ClearUI>();
+   
         Initialize();
     }
+    private void Start()
+    {
+       SoundManager.Instance.setEffect(mainScene_sound);        
+    }
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
