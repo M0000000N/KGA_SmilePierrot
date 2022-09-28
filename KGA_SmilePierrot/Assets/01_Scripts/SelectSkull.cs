@@ -31,7 +31,10 @@ public class SelectSkull : MonoBehaviour
 
     private void Update()
     {
-        SkullColorCheck(); 
+        if(GameManager.Instance.IsPause == false && GameManager.Instance.IsInGame)
+        {
+            SkullColorCheck(); 
+        }
     }
 
     private void SkullColorCheck()

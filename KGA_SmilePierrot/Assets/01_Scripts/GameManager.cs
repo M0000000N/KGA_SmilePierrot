@@ -14,6 +14,7 @@ public class GameManager : SingletonBehaviour<GameManager>
     public Pannel Pannel;
     public Skull Skull;
     public SelectSkull SelectSkull;
+    public PlayController PlayController;
 
     [Header("테스트값")]
     public int MAXSTAGE;
@@ -28,9 +29,11 @@ public class GameManager : SingletonBehaviour<GameManager>
         HP = 5;
         ClickCount = 0;
         Stage = 1;
-        IsInGame = false;
+        
         IsPause = false;
+        CanSelectSkull = false;
         SelectSkull.Initialize();
+        PlayController.Initialize();
         UIManager.Instance.InGameUI.RefreshUI();
     }
 
@@ -54,7 +57,7 @@ public class GameManager : SingletonBehaviour<GameManager>
 
     public void GameStart() // 랜덤으로 패널 보여주기
     {
-        IsInGame = true;
+        Pannel.Initialize();
         if (Stage == 1)
         {
             Pannel.StartCoroutine("SetPannelColorCoroutine",1f);
@@ -66,14 +69,12 @@ public class GameManager : SingletonBehaviour<GameManager>
         ClickCount = 0;
         UIManager.Instance.InGameUI.SetStageText(Stage);
         UIManager.Instance.InGameUI.SetHp(HP);
-        Pannel.Initialize();
     }
 
     public void NextStage()
     {
         if (Stage >= MAXSTAGE) // TODO : 나중에 매직넘버 바꿔주세요.
         {
-            // 게임 클리어 씬으로 이동을 하던가 하겠죠
             UIManager.Instance.ClearUI.gameObject.SetActive(true);
             return;
         }

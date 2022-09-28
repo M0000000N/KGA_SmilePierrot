@@ -19,6 +19,8 @@ public class GameOverUI : MonoBehaviour
         gameObject.SetActive(false);
         UIManager.Instance.InGameUI.gameObject.SetActive(true);
         GameManager.Instance.Initialize();
+        GameManager.Instance.IsInGame = true;
+
     }
     public void NoButtonClick()
     {

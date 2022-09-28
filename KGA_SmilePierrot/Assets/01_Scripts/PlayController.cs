@@ -34,7 +34,7 @@ public class PlayController : MonoBehaviour
 
     void Update()
     {
-        if (GameManager.Instance.IsPause == false)
+        if (GameManager.Instance.IsPause == false && GameManager.Instance.IsInGame)
         {
             cameraRotation();
         }
