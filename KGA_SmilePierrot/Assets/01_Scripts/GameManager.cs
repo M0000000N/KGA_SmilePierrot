@@ -36,7 +36,7 @@ public class GameManager : SingletonBehaviour<GameManager>
         IsInGame = false;
         IsPause = false;
         SelectSkull.Initialize();
-        UIManager.Instance.Initialize();
+        UIManager.Instance.InGameUI.RefreshUI();
     }
 
     public void Damaged()
@@ -63,10 +63,6 @@ public class GameManager : SingletonBehaviour<GameManager>
         if (Stage == 1)
         {
             Pannel.StartCoroutine("SetPannelColorCoroutine",1f);
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                // TODO : 스테이지 1은 E를 눌러야 시작할 수 있도록 변경 필요
-            }
         }
         else
         {

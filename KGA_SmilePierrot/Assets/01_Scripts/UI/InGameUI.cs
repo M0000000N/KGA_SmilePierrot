@@ -19,10 +19,16 @@ public class InGameUI : MonoBehaviour
 
         gameObject.SetActive(false);
 
-        SetStageText(1);
-        SetHp(HPImages.Length);
+        RefreshUI();
+    }
+
+    public void RefreshUI()
+    {
+        SetStageText(GameManager.Instance.Stage);
+        SetHp(GameManager.Instance.HP);
         ProgressBar.value = 1;
     }
+
     private void Update()
     {
         if (GameManager.Instance.CanSelectSkull)

@@ -38,7 +38,7 @@ public class SelectSkull : MonoBehaviour
     {
         Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward.normalized * 5f, Color.red) ;
        
-        if(Input.GetKeyDown(KeyCode.E))
+        if(Input.GetKeyDown(KeyCode.E) && !takeStick)
         {
             takeStick = true;
             animator.SetTrigger("TakeStick");

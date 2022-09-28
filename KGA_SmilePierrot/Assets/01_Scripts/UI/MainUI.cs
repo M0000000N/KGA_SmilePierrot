@@ -17,7 +17,6 @@ public class MainUI : MonoBehaviour
     public void GameStartButtonClick()
     {
         UIManager.Instance.GameStartPopUpUI.gameObject.SetActive(true);
-        GameManager.Instance.Initialize();
     }
 
     public void ExitButtonClick()
