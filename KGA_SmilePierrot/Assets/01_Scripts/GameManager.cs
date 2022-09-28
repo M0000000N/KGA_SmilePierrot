@@ -45,6 +45,10 @@ public class GameManager : SingletonBehaviour<GameManager>
         {
             GameOver();
         }
+        else
+        {
+            GameStart();
+        }
     }
 
     public void GameOver()
@@ -52,6 +56,7 @@ public class GameManager : SingletonBehaviour<GameManager>
         UnityEngine.Debug.Log("게임오버");
         UIManager.Instance.InGameUI.gameObject.SetActive(false);
         UIManager.Instance.GameOverUI.gameObject.SetActive(true);
+        Pannel.StopAllCoroutines();
         IsInGame = false;
     }
 
@@ -81,6 +86,7 @@ public class GameManager : SingletonBehaviour<GameManager>
 
         Stage++;
         SetStage();
+        GameStart();
     }
 
     public void SetStage()
@@ -89,7 +95,6 @@ public class GameManager : SingletonBehaviour<GameManager>
         UIManager.Instance.InGameUI.SetStageText(Stage);
         Pannel.Initialize();
         Skull.Initialize();
-        GameStart();
     }
 
     public void CheckColor(Color _color)
