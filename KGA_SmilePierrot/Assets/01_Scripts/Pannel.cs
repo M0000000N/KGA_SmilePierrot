@@ -11,8 +11,6 @@ public class Pannel : MonoBehaviour
     private TextMeshPro colorText;
     // private string[]colorTextArray = new string[] { "RED", "BLUE", "GREEN", "WHITE"};
 
-    public float delayTime;
-
     // public int RememberCount; // TODO : CSV에서 가져와야 합니다. 
 
     public Color PannelColor; // 현재 패널 컬러
@@ -74,7 +72,7 @@ public class Pannel : MonoBehaviour
 
             SetPannelColor(index);
             // colorText.text = colorTextArray[int.Parse(pannelColor.name) - 1];
-            yield return new WaitForSeconds(delayTime);
+            yield return new WaitForSeconds(GameManager.Instance.PannelDelayTime[GameManager.Instance.Stage]);
 
             index++;
         }

@@ -15,7 +15,7 @@ public class Skull : MonoBehaviour
     {
         for (int i = 0; i < skulls.Length; i++)
         {
-            if(i < int.Parse(CSVParser.Instance.GetCsvData(GameManager.Instance.Stage).Remember_count)) // TODO : csv에서 가져와서 반영해야 합니다.
+            if(i < int.Parse(CSVParser.Instance.GetCsvData(GameManager.Instance.Stage).Remember_count))
             {
                 skulls[i].SetActive(true);
             }

@@ -17,7 +17,8 @@ public class GameManager : SingletonBehaviour<GameManager>
 
     [Header("테스트값")]
     public int MAXSTAGE;
-    public int[] LimitTime;
+    public float[] LimitTime;
+    public float[] PannelDelayTime;
 
 
     public bool IsInGame;
@@ -25,7 +26,8 @@ public class GameManager : SingletonBehaviour<GameManager>
 
     private void Awake()
     {
-        LimitTime = new int[MAXSTAGE];
+        LimitTime = new float[MAXSTAGE];
+        PannelDelayTime = new float[MAXSTAGE];
     }
 
     public void Initialize()

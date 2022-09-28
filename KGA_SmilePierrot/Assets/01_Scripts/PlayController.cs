@@ -11,8 +11,10 @@ public class PlayController : MonoBehaviour
     private float lookSensitivity;
 
     //카메라 각도 제한 
-    [SerializeField]
-    private float cameraRotationLimit;
+    [SerializeField] float cameraLeftRotationLimit;
+    [SerializeField] float cameraRightRotationLimit;
+    [SerializeField] float cameraUpRotationLimit;
+    [SerializeField] float cameraDownRotationLimit;
     private float currentCameraRotationX = 0f;
     private float currentCameraRotationY = 0f;
 
@@ -45,12 +47,12 @@ public class PlayController : MonoBehaviour
         float cameraRotationX = xRotation * lookSensitivity;
         currentCameraRotationX -= cameraRotationX;
 
-        currentCameraRotationX = Mathf.Clamp(currentCameraRotationX, -cameraRotationLimit, cameraRotationLimit); // 각도 제한 
+        currentCameraRotationX = Mathf.Clamp(currentCameraRotationX, -cameraUpRotationLimit, cameraDownRotationLimit); // 각도 제한 
 
         float yRotation = Input.GetAxisRaw("Mouse X");
         float cameraRotationY = yRotation * lookSensitivity;
         currentCameraRotationY += cameraRotationY;
-        currentCameraRotationY = Mathf.Clamp(currentCameraRotationY, -cameraRotationLimit, cameraRotationLimit);
+        currentCameraRotationY = Mathf.Clamp(currentCameraRotationY, -cameraLeftRotationLimit, cameraRightRotationLimit);
 
         camera.transform.localEulerAngles = new Vector3(currentCameraRotationX, currentCameraRotationY, 0);
     }
