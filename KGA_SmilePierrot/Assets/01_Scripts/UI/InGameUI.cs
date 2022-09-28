@@ -63,7 +63,7 @@ public class InGameUI : MonoBehaviour
 
     public void StartTimeLimit()
     {
-        ProgressBar.value -= Time.deltaTime / 10;//csv에서 가져올 제한숫자거
+        ProgressBar.value -= Time.deltaTime / GameManager.Instance.LimitTime[GameManager.Instance.Stage];
         if (ProgressBar.value <= 0)
         {
             GameManager.Instance.GameOver();

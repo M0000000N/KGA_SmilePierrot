@@ -20,15 +20,8 @@ public class GameManager : SingletonBehaviour<GameManager>
     public float[] LimitTime;
     public float[] PannelDelayTime;
 
-
     public bool IsInGame;
     public bool IsPause;
-
-    private void Awake()
-    {
-        LimitTime = new float[MAXSTAGE];
-        PannelDelayTime = new float[MAXSTAGE];
-    }
 
     public void Initialize()
     {
