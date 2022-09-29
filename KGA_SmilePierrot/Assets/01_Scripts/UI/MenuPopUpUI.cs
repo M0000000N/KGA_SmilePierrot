@@ -6,6 +6,7 @@ public class MenuPopUpUI : MonoBehaviour
 {
     private Transform initTransform;
 
+    [SerializeField] private string buttonClick_Sound;
     public void Initialize()
     {
         initTransform = this.transform.parent.transform;
@@ -16,6 +17,7 @@ public class MenuPopUpUI : MonoBehaviour
 
     public void ResumeButtonCilck()
     {
+        SoundManager.Instance.setEffect(buttonClick_Sound);
         gameObject.SetActive(false);
         GameManager.Instance.IsPause = false;
         Time.timeScale = 1;

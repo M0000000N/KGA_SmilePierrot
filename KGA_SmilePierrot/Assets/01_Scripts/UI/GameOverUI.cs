@@ -7,9 +7,6 @@ public class GameOverUI : MonoBehaviour
     private Transform initTransform;
 
     [SerializeField]
-    private string gameOver_Sound;
-
-    [SerializeField]
     private string buttonClick_Sound;
     public void Initialize()
     {
@@ -20,19 +17,19 @@ public class GameOverUI : MonoBehaviour
     }
     public void YesButtonClick()
     {
+        SoundManager.Instance.setEffect(buttonClick_Sound);
         gameObject.SetActive(false);
         UIManager.Instance.InGameUI.gameObject.SetActive(true);
         GameManager.Instance.Initialize();
         GameManager.Instance.IsInGame = true;
 
-        SoundManager.Instance.setEffect(buttonClick_Sound);
         Debug.Log("다시 플레이 할게요");
     }
     public void NoButtonClick()
     {
+        SoundManager.Instance.setEffect(buttonClick_Sound);
         gameObject.SetActive(false);
         UIManager.Instance.MainUI.gameObject.SetActive(true);
-        SoundManager.Instance.setEffect(buttonClick_Sound);
         Debug.Log("다시 플레이 안해");
     }
 }

@@ -17,6 +17,8 @@ public class SelectSkull : MonoBehaviour
     [SerializeField] GameObject DefaultMagicStick;
     [SerializeField] GameObject MagicStick;
 
+    [SerializeField] private string magicStick_Sound;
+
     void Start()
     {
         Initialize();
@@ -50,6 +52,7 @@ public class SelectSkull : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0) && GameManager.Instance.CanSelectSkull && takeStick)
         {
+            SoundManager.Instance.setEffect(magicStick_Sound);
             animator.SetTrigger("MagicSitck");
             layerMask = LayerMask.GetMask("Skull");
 

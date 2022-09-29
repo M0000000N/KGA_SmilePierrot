@@ -12,6 +12,7 @@ public class UIManager : SingletonBehaviour<UIManager>
     public CreditUI CreditUI;
     public ClearUI ClearUI;
 
+    [SerializeField] private string mainMenu_Sound; 
     private void Awake()
     {
         MainUI = GetComponentInChildren<MainUI>();
@@ -24,6 +25,11 @@ public class UIManager : SingletonBehaviour<UIManager>
 
         Initialize();
     }
+    private void Start()
+    {
+        SoundManager.Instance.setEffect(mainMenu_Sound);
+    }
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape) && GameManager.Instance.IsInGame)

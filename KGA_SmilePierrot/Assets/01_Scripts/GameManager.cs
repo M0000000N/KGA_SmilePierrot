@@ -24,6 +24,12 @@ public class GameManager : SingletonBehaviour<GameManager>
     public bool IsInGame;
     public bool IsPause;
 
+    [SerializeField] private string GameOver_Sound;
+    [SerializeField] private string GameScene_Sound;
+    [SerializeField] private string GameClear_Sound;
+    [SerializeField] private string Right_Sound;
+    [SerializeField] private string Wrong_Sound;
+
     public void Initialize()
     {
         HP = 5;
@@ -36,6 +42,7 @@ public class GameManager : SingletonBehaviour<GameManager>
         PlayController.Initialize();
         Skull.Initialize();
         UIManager.Instance.InGameUI.RefreshUI();
+        PlayBGM(); 
     }
 
     public void Damaged()
@@ -55,6 +62,8 @@ public class GameManager : SingletonBehaviour<GameManager>
     public void GameOver()
     {
         UnityEngine.Debug.Log("게임오버");
+        SoundManager.Instance.BGM.Stop();
+        SoundManager.Instance.setEffect(GameOver_Sound);
         UIManager.Instance.InGameUI.gameObject.SetActive(false);
         UIManager.Instance.GameOverUI.gameObject.SetActive(true);
         Pannel.StopAllCoroutines();
@@ -69,7 +78,7 @@ public class GameManager : SingletonBehaviour<GameManager>
             Pannel.StartCoroutine("SetPannelColorCoroutine",1f);
         }
         else
-        {
+        {         
             Pannel.StartCoroutine("SetPannelColorCoroutine",2f);
         }
         ClickCount = 0;
@@ -83,12 +92,15 @@ public class GameManager : SingletonBehaviour<GameManager>
 
         if (Stage > MAXSTAGE) // TODO : 나중에 매직넘버 바꿔주세요.
         {
+            SoundManager.Instance.BGM.Stop();
+            SoundManager.Instance.setEffect(GameClear_Sound);
             UIManager.Instance.ClearUI.gameObject.SetActive(true);
             return;
         }
 
         SetStage();
         GameStart();
+        
     }
 
     public void SetStage()
@@ -103,6 +115,7 @@ public class GameManager : SingletonBehaviour<GameManager>
     {
         if (Pannel.RandomColor[ClickCount] == _color)
         {
+            SoundManager.Instance.setEffect(Right_Sound);
             ClickCount++;
             UnityEngine.Debug.Log(ClickCount);
             if(Pannel.RandomColor.Length <= ClickCount)
@@ -112,6 +125,7 @@ public class GameManager : SingletonBehaviour<GameManager>
         }
         else
         {
+            SoundManager.Instance.setEffect(Wrong_Sound);
             Damaged();
             SetStage();
         }
@@ -121,5 +135,10 @@ public class GameManager : SingletonBehaviour<GameManager>
     {
         IsPause = true;
         Time.timeScale = 0;
+    }
+
+    public void PlayBGM()
+    {
+        SoundManager.Instance.SetBGM(GameScene_Sound);
     }
 }
