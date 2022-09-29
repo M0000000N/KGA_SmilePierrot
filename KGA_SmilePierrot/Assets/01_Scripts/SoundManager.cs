@@ -57,8 +57,8 @@ public class SoundManager : SingletonBehaviour<SoundManager>
 
        // if (audioClipDic.TryGetValue(name, out AudioClip audioClip))
         
-            effect.clip = audioClipDic[name];
-            effect.Play();
+        effect.clip = audioClipDic[name];
+        effect.Play();
         
     }
 
