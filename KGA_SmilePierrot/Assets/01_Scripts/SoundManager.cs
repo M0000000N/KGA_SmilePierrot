@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class SoundManager : SingletonBehaviour<SoundManager>
 {
-   
-   public AudioSource effect;
+    public AudioSource effect;
     public AudioSource BGM; 
 
     [SerializeField] AudioClip[] audioEffect;
@@ -19,18 +18,14 @@ public class SoundManager : SingletonBehaviour<SoundManager>
             DontDestroyOnLoad(Instance.gameObject);
         }
     }
-
-        //foreach (AudioClip audio in audioEffect)
-        //{
-        
-        //}
     private void Start()
     {
         effect = GetComponent<AudioSource>();
+        BGM = gameObject.AddComponent<AudioSource>();
+        BGM.volume = 0.1f; 
 
         audioClipDic = new Dictionary<string, AudioClip>();
 
-        // audioClipDic.Add(audio.name, audio);
         name = "fail";
         audioClipDic.Add(name, audioEffect[0]);
         name = "Victory";
@@ -46,32 +41,25 @@ public class SoundManager : SingletonBehaviour<SoundManager>
         name = "getwand";
         audioClipDic.Add(name, audioEffect[6]);
 
-        //BGM 
-        //audioClipDic.Add(name, audioBGM[6]);
-        name = "GameScene"; // BGM
+        name = "GameScene"; 
         audioClipDic.Add(name, audioBGM);
 
     }
-
-    public void SetBGM()
+    public void SetBGM(string name)
     {
-        if (audioBGM == null) return;
-
-        BGM = GetComponent<AudioSource>();  
-        BGM.clip = audioBGM;
+        BGM.clip = audioClipDic[name];
         BGM.PlayOneShot(audioBGM);
-        
     }
- 
 
     public void setEffect(string name)
-    {    
-        Debug.Log(audioClipDic[name]);
+    {
+        Debug.Log(name);
 
-        if (audioClipDic.TryGetValue(name, out AudioClip audioClip))
-        {
-           effect.PlayOneShot(audioClipDic[name]); // 오류뜨네..
-        }
+       // if (audioClipDic.TryGetValue(name, out AudioClip audioClip))
+        
+            effect.clip = audioClipDic[name];
+            effect.Play();
+        
     }
 
     // 메인메뉴 넘어갈 때 

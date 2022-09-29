@@ -6,6 +6,8 @@ public class GameStartPopUpUI : MonoBehaviour
 {
     private Transform initTransform;
 
+    [SerializeField] private string buttonClick_Sound;
+
     public void Initialize()
     {
         initTransform = this.transform.parent.transform;
@@ -16,6 +18,7 @@ public class GameStartPopUpUI : MonoBehaviour
 
     public void GameStartButtonClick()
     {
+        SoundManager.Instance.setEffect(buttonClick_Sound);
         gameObject.SetActive(false);
         UIManager.Instance.MainUI.gameObject.SetActive(false);
         UIManager.Instance.InGameUI.gameObject.SetActive(true);
