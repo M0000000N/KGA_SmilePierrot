@@ -26,5 +26,6 @@ public class MenuPopUpUI : MonoBehaviour
     public void ExitButtonCilck()
     {
         Debug.Log("게임 종료");
+        Application.Quit();
     }
 }
